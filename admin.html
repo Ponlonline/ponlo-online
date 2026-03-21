@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin | Ponlonline</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="shortcut icon" href="favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #050914;
+      --panel: rgba(14, 19, 38, 0.75);
+      --stroke: rgba(255, 255, 255, 0.14);
+      --text: #eaf0ff;
+      --muted: #a4b0ce;
+      --green: #1fd868;
+      --green-deep: #16a75f;
+      --danger: #ff5d7d;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at 15% 12%, rgba(143, 105, 255, 0.35), rgba(143, 105, 255, 0) 36%),
+        radial-gradient(circle at 88% 86%, rgba(80, 211, 255, 0.32), rgba(80, 211, 255, 0) 34%),
+        var(--bg);
+      min-height: 100vh;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+      color: inherit;
+    }
+
+    .glass {
+      background: linear-gradient(130deg, rgba(22, 30, 55, 0.74), rgba(8, 12, 24, 0.82));
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .login-wrap {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+    }
+
+    .login-card {
+      width: min(420px, 100%);
+      border-radius: 22px;
+      padding: 28px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .title {
+      font-family: "Outfit", sans-serif;
+      font-size: 2rem;
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #b6c2e4;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .input,
+    .textarea,
+    .select {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--stroke);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 10px 11px;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .textarea {
+      min-height: 76px;
+      resize: vertical;
+    }
+
+    .input:focus,
+    .textarea:focus,
+    .select:focus {
+      border-color: rgba(31, 216, 104, 0.7);
+    }
+
+    .btn {
+      border: 1px solid var(--stroke);
+      border-radius: 999px;
+      padding: 9px 13px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #eaf0ff;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.2s ease, background-color 0.2s ease;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      opacity: 0.98;
+    }
+
+    .btn-main {
+      border-color: rgba(255, 255, 255, 0.35);
+      background: linear-gradient(125deg, var(--green), #2ff2a5);
+      color: #001b09;
+      font-weight: 800;
+    }
+
+    .btn-main:hover {
+      background: linear-gradient(125deg, var(--green-deep), #1fd887);
+    }
+
+    .btn-danger {
+      border-color: rgba(255, 93, 125, 0.36);
+      color: #ffc6d1;
+      background: rgba(255, 93, 125, 0.12);
+    }
+
+    .err {
+      color: #ff9ab0;
+      font-size: 0.84rem;
+      display: none;
+    }
+
+    .err.show {
+      display: block;
+    }
+
+    #app {
+      display: none;
+      padding: 16px 0 26px;
+    }
+
+    .container {
+      width: min(1240px, calc(100% - 26px));
+      margin: 0 auto;
+    }
+
+    .top {
+      border-radius: 999px;
+      min-height: 62px;
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "Outfit", sans-serif;
+      font-size: 1.04rem;
+      font-weight: 700;
+    }
+
+    .dot {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(80, 211, 255, 0.3), rgba(143, 105, 255, 0.4));
+      border: 1px solid var(--stroke);
+    }
+
+    .dot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .top-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .editor-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .panel {
+      border-radius: var(--radius-lg);
+      padding: 12px;
+    }
+
+    .panel-title {
+      font-family: "Outfit", sans-serif;
+      font-size: 1.18rem;
+      margin-bottom: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .fields {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 1fr;
+    }
+
+    .field {
+      display: grid;
+      gap: 4px;
+    }
+
+    .repeat-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .repeat-item {
+      border: 1px solid var(--stroke);
+      border-radius: 12px;
+      padding: 8px;
+      background: rgba(255, 255, 255, 0.03);
+      display: grid;
+      gap: 8px;
+    }
+
+    .repeat-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #c7d1e8;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .repeat-actions {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .repeat-actions .btn {
+      padding: 6px 9px;
+      font-size: 0.68rem;
+    }
+
+    .repeat-fields {
+      display: grid;
+      gap: 7px;
+      grid-template-columns: 1fr;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.45;
+      margin-top: 6px;
+    }
+
+    .footer-actions {
+      border-radius: var(--radius-lg);
+      padding: 12px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translate(-50%, 16px);
+      border-radius: 10px;
+      border: 1px solid var(--stroke);
+      background: rgba(14, 19, 38, 0.94);
+      color: #dce7ff;
+      padding: 10px 14px;
+      font-size: 0.83rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 100;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    @media (min-width: 900px) {
+      .fields.two {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .fields.three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .repeat-fields.two {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .editor-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .panel.full {
+        grid-column: span 2;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section id="login" class="login-wrap">
+    <article class="login-card glass">
+      <h1 class="title">Admin · Ponlonline</h1>
+      <p class="subtitle">Ingresa la contraseña para continuar.</p>
+
+      <div>
+        <label class="label" for="password">Contraseña</label>
+        <input id="password" class="input" type="password" autocomplete="current-password" placeholder="Contraseña" />
+      </div>
+
+      <button id="loginBtn" class="btn btn-main" type="button">Entrar al admin</button>
+      <p id="loginErr" class="err">No se pudo iniciar sesión.</p>
+    </article>
+  </section>
+
+  <main id="app">
+    <div class="container">
+      <header class="top glass">
+        <div class="brand"><span class="dot"><img src="favicon.svg" alt="Logo" /></span> Ponlonline Admin</div>
+        <div class="top-actions">
+          <a class='btn' href='/' rel='noopener' target='_blank'>Ver sitio</a>
+          <button id="reloadBtn" class="btn" type="button">Recargar remoto</button>
+          <button id="restoreBtn" class="btn" type="button">Restaurar default</button>
+          <button id="saveDraftBtn" class="btn" type="button">Guardar borrador</button>
+          <button id="loadDraftBtn" class="btn" type="button">Cargar borrador</button>
+          <button id="publishBtn" class="btn btn-main" type="button">Publicar cambios</button>
+          <button id="logoutBtn" class="btn" type="button">Salir</button>
+        </div>
+      </header>
+
+      <section class="editor-grid">
+        <article class="panel glass">
+          <h2 class="panel-title">Header</h2>
+          <div class="fields two">
+            <div class="field"><label class="label">Nombre de marca</label><input id="brandName" class="input" data-path="brand.name" /></div>
+            <div class="field"><label class="label">URL logo</label><input id="brandLogoUrl" class="input" data-path="brand.logoUrl" /></div>
+            <div class="field"><label class="label">Botón header</label><input id="headerBtnLabel" class="input" data-path="brand.headerButton.label" /></div>
+            <div class="field"><label class="label">URL botón header</label><input id="headerBtnUrl" class="input" data-path="brand.headerButton.url" /></div>
+          </div>
+
+          <h3 class="panel-title" style="margin-top:10px; font-size:1rem;">Menú navegación</h3>
+          <div id="navList" class="repeat-list" data-section="nav"></div>
+          <button id="addNavBtn" class="btn" type="button">Agregar item menú</button>
+        </article>
+
+        <article class="panel glass">
+          <h2 class="panel-title">Hero</h2>
+          <div class="fields">
+            <div class="field"><label class="label">Eyebrow</label><input id="heroEyebrow" class="input" data-path="hero.eyebrow" /></div>
+            <div class="field"><label class="label">Título principal</label><textarea id="heroTitle" class="textarea" data-path="hero.title"></textarea></div>
+            <div class="field"><label class="label">Slogan (debajo del título)</label><textarea id="heroSlogan" class="textarea" data-path="hero.slogan"></textarea></div>
+            <div class="field"><label class="label">Descripción</label><textarea id="heroDescription" class="textarea" data-path="hero.description"></textarea></div>
+          </div>
+          <div class="fields two" style="margin-top:8px;">
+            <div class="field"><label class="label">CTA principal texto</label><input id="heroPrimaryLabel" class="input" data-path="hero.primaryCta.label" /></div>
+            <div class="field"><label class="label">CTA principal URL</label><input id="heroPrimaryUrl" class="input" data-path="hero.primaryCta.url" /></div>
+            <div class="field"><label class="label">CTA secundario texto</label><input id="heroSecondaryLabel" class="input" data-path="hero.secondaryCta.label" /></div>
+            <div class="field"><label class="label">CTA secundario URL</label><input id="heroSecondaryUrl" class="input" data-path="hero.secondaryCta.url" /></div>
+          </div>
+        </article>
+
+        <article class="panel glass">
+          <h2 class="panel-title">Radar</h2>
+          <div class="fields two">
+            <div class="field"><label class="label">Título radar</label><input id="radarTitle" class="input" data-path="radar.title" /></div>
+            <div class="field"><label class="label">Período</label><input id="radarPeriod" class="input" data-path="radar.period" /></div>
+          </div>
+
+          <div id="metricsList" class="repeat-list" data-section="metrics" style="margin-top:8px;"></div>
+          <button id="addMetricBtn" class="btn" type="button">Agregar métrica</button>
+        </article>
+
+        <article class="panel glass">
+          <h2 class="panel-title">Sección de proyectos</h2>
+          <div class="fields">
+            <div class="field"><label class="label">Título sección</label><input id="projectsHeading" class="input" data-path="projectsSection.heading" /></div>
+            <div class="field"><label class="label">Descripción sección</label><textarea id="projectsDescription" class="textarea" data-path="projectsSection.description"></textarea></div>
+          </div>
+        </article>
+
+        <article class="panel glass">
+          <h2 class="panel-title">Resultados + IA</h2>
+          <div class="fields">
+            <div class="field"><label class="label">Título sección resultados</label><input id="insightsHeading" class="input" data-path="insightsSection.heading" /></div>
+            <div class="field"><label class="label">Descripción sección resultados</label><textarea id="insightsDescription" class="textarea" data-path="insightsSection.description"></textarea></div>
+            <div class="field"><label class="label">Título bloque IA</label><input id="aiLoopTitle" class="input" data-path="aiLoop.title" /></div>
+            <div class="field"><label class="label">Período bloque IA</label><input id="aiLoopPeriod" class="input" data-path="aiLoop.period" /></div>
+          </div>
+        </article>
+
+        <article class="panel glass full">
+          <h2 class="panel-title">Proyectos del portafolio</h2>
+          <div id="projectsList" class="repeat-list" data-section="projects"></div>
+          <button id="addProjectBtn" class="btn" type="button">Agregar proyecto</button>
+          <p class="hint">Cada proyecto soporta imagen y también <strong>video de portada</strong> (si pones URL de video se usa en vez de la imagen). En el landing los links aparecen como "Ver página" automáticamente.</p>
+        </article>
+
+        <article class="panel glass full">
+          <h2 class="panel-title">Métricas de resultados</h2>
+          <div id="insightsMetricsList" class="repeat-list" data-section="insightsMetrics"></div>
+          <button id="addInsightsMetricBtn" class="btn" type="button">Agregar métrica de resultado</button>
+        </article>
+
+        <article class="panel glass full">
+          <h2 class="panel-title">Acciones del ciclo IA</h2>
+          <div id="aiActionsList" class="repeat-list" data-section="aiActions"></div>
+          <button id="addAiActionBtn" class="btn" type="button">Agregar acción IA</button>
+        </article>
+
+        <article class="panel glass">
+          <h2 class="panel-title">Sección de precios</h2>
+          <div class="fields">
+            <div class="field"><label class="label">Título sección</label><input id="pricingHeading" class="input" data-path="pricingSection.heading" /></div>
+            <div class="field"><label class="label">Descripción sección</label><textarea id="pricingDescription" class="textarea" data-path="pricingSection.description"></textarea></div>
+          </div>
+        </article>
+
+        <article class="panel glass">
+          <h2 class="panel-title">Sección de proceso</h2>
+          <div class="fields">
+            <div class="field"><label class="label">Título sección</label><input id="processHeading" class="input" data-path="processSection.heading" /></div>
+            <div class="field"><label class="label">Descripción sección</label><textarea id="processDescription" class="textarea" data-path="processSection.description"></textarea></div>
+          </div>
+        </article>
+
+        <article class="panel glass full">
+          <h2 class="panel-title">Planes de precios</h2>
+          <div id="plansList" class="repeat-list" data-section="plans"></div>
+          <button id="addPlanBtn" class="btn" type="button">Agregar plan</button>
+        </article>
+
+        <article class="panel glass full">
+          <h2 class="panel-title">Pasos del proceso</h2>
+          <div id="stepsList" class="repeat-list" data-section="steps"></div>
+          <button id="addStepBtn" class="btn" type="button">Agregar paso</button>
+        </article>
+
+        <article class="panel glass full">
+          <h2 class="panel-title">CTA final y footer</h2>
+          <div class="fields two">
+            <div class="field"><label class="label">Título CTA</label><textarea id="ctaHeading" class="textarea" data-path="cta.heading"></textarea></div>
+            <div class="field"><label class="label">Descripción CTA</label><textarea id="ctaDescription" class="textarea" data-path="cta.description"></textarea></div>
+            <div class="field"><label class="label">CTA principal texto</label><input id="ctaPrimaryLabel" class="input" data-path="cta.primaryCta.label" /></div>
+            <div class="field"><label class="label">CTA principal URL</label><input id="ctaPrimaryUrl" class="input" data-path="cta.primaryCta.url" /></div>
+            <div class="field"><label class="label">CTA secundario texto</label><input id="ctaSecondaryLabel" class="input" data-path="cta.secondaryCta.label" /></div>
+            <div class="field"><label class="label">CTA secundario URL</label><input id="ctaSecondaryUrl" class="input" data-path="cta.secondaryCta.url" /></div>
+            <div class="field"><label class="label">Chips (separados por coma)</label><input id="ctaChips" class="input" data-path="cta.chips" data-type="chips" /></div>
+            <div class="field"><label class="label">Texto footer</label><input id="footerText" class="input" data-path="footerText" /></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="footer-actions glass" style="margin-top:10px;">
+        <button id="clearDraftBtn" class="btn btn-danger" type="button">Limpiar borrador local</button>
+        <button id="publishBtnBottom" class="btn btn-main" type="button">Publicar cambios</button>
+      </section>
+    </div>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="landing-config.js"></script>
+  <script>
+    const DRAFT_KEY = "ponlo_online_friendly_admin_draft_v1";
+
+    const state = {
+      password: "",
+      config: null,
+    };
+
+    const ids = {
+      login: document.getElementById("login"),
+      app: document.getElementById("app"),
+      password: document.getElementById("password"),
+      loginBtn: document.getElementById("loginBtn"),
+      loginErr: document.getElementById("loginErr"),
+      reloadBtn: document.getElementById("reloadBtn"),
+      restoreBtn: document.getElementById("restoreBtn"),
+      saveDraftBtn: document.getElementById("saveDraftBtn"),
+      loadDraftBtn: document.getElementById("loadDraftBtn"),
+      publishBtn: document.getElementById("publishBtn"),
+      publishBtnBottom: document.getElementById("publishBtnBottom"),
+      clearDraftBtn: document.getElementById("clearDraftBtn"),
+      logoutBtn: document.getElementById("logoutBtn"),
+      addNavBtn: document.getElementById("addNavBtn"),
+      addMetricBtn: document.getElementById("addMetricBtn"),
+      addProjectBtn: document.getElementById("addProjectBtn"),
+      addInsightsMetricBtn: document.getElementById("addInsightsMetricBtn"),
+      addAiActionBtn: document.getElementById("addAiActionBtn"),
+      addPlanBtn: document.getElementById("addPlanBtn"),
+      addStepBtn: document.getElementById("addStepBtn"),
+      navList: document.getElementById("navList"),
+      metricsList: document.getElementById("metricsList"),
+      projectsList: document.getElementById("projectsList"),
+      insightsMetricsList: document.getElementById("insightsMetricsList"),
+      aiActionsList: document.getElementById("aiActionsList"),
+      plansList: document.getElementById("plansList"),
+      stepsList: document.getElementById("stepsList"),
+      toast: document.getElementById("toast"),
+    };
+
+    function clone(value) {
+      return JSON.parse(JSON.stringify(value));
+    }
+
+    function deepMerge(base, source) {
+      if (typeof base !== "object" || base === null) {
+        return source;
+      }
+
+      const output = Array.isArray(base) ? [...base] : { ...base };
+      if (typeof source !== "object" || source === null) {
+        return output;
+      }
+
+      Object.keys(source).forEach((key) => {
+        const sourceValue = source[key];
+        const baseValue = output[key];
+
+        if (Array.isArray(sourceValue)) {
+          output[key] = [...sourceValue];
+          return;
+        }
+
+        if (sourceValue && typeof sourceValue === "object") {
+          output[key] = deepMerge(baseValue || {}, sourceValue);
+          return;
+        }
+
+        output[key] = sourceValue;
+      });
+
+      return output;
+    }
+
+    function getDefaults() {
+      return clone(window.PONLO_DEFAULT_CONFIG || {});
+    }
+
+    function normalizeConfig(rawConfig, legacyProjects) {
+      const defaults = getDefaults();
+      const merged = deepMerge(defaults, rawConfig || {});
+
+      if (Array.isArray(legacyProjects) && legacyProjects.length && (!Array.isArray(merged.projects) || !merged.projects.length)) {
+        merged.projects = legacyProjects;
+      }
+
+      if (!Array.isArray(merged.brand?.nav)) merged.brand.nav = [];
+      if (!Array.isArray(merged.radar?.metrics)) merged.radar.metrics = [];
+      if (!Array.isArray(merged.insightsMetrics)) merged.insightsMetrics = [];
+      if (!merged.aiLoop || typeof merged.aiLoop !== "object") merged.aiLoop = { title: "", period: "", actions: [] };
+      if (!Array.isArray(merged.aiLoop?.actions)) merged.aiLoop.actions = [];
+      if (!Array.isArray(merged.projects)) merged.projects = [];
+      if (!Array.isArray(merged.pricingPlans)) merged.pricingPlans = [];
+      if (!Array.isArray(merged.processSteps)) merged.processSteps = [];
+      if (!Array.isArray(merged.cta?.chips)) merged.cta.chips = [];
+
+      return merged;
+    }
+
+    function showToast(message) {
+      ids.toast.textContent = message;
+      ids.toast.classList.add("show");
+      window.clearTimeout(showToast.timer);
+      showToast.timer = window.setTimeout(() => {
+        ids.toast.classList.remove("show");
+      }, 2200);
+    }
+
+    function saveDraft(config) {
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(config));
+    }
+
+    function loadDraft() {
+      try {
+        const raw = localStorage.getItem(DRAFT_KEY);
+        if (!raw) return null;
+        return JSON.parse(raw);
+      } catch (_err) {
+        return null;
+      }
+    }
+
+    function clearDraft() {
+      localStorage.removeItem(DRAFT_KEY);
+    }
+
+    function setByPath(obj, path, value) {
+      const parts = path.split(".");
+      let cursor = obj;
+      for (let i = 0; i < parts.length - 1; i += 1) {
+        const part = parts[i];
+        if (!cursor[part] || typeof cursor[part] !== "object") {
+          cursor[part] = {};
+        }
+        cursor = cursor[part];
+      }
+      cursor[parts[parts.length - 1]] = value;
+    }
+
+    function getByPath(obj, path) {
+      return path.split(".").reduce((acc, key) => acc?.[key], obj);
+    }
+
+    function renderSimpleFields() {
+      document.querySelectorAll("[data-path]").forEach((input) => {
+        const path = input.dataset.path;
+        const type = input.dataset.type || "text";
+        const value = getByPath(state.config, path);
+
+        if (type === "chips") {
+          input.value = Array.isArray(value) ? value.join(", ") : "";
+          return;
+        }
+
+        input.value = value ?? "";
+      });
+    }
+
+    function createRowActions(section, index, total) {
+      return `
+        <div class="repeat-actions">
+          <button class="btn" data-action="up" data-section="${section}" data-index="${index}" ${index === 0 ? "disabled" : ""}>Subir</button>
+          <button class="btn" data-action="down" data-section="${section}" data-index="${index}" ${index === total - 1 ? "disabled" : ""}>Bajar</button>
+          <button class="btn btn-danger" data-action="delete" data-section="${section}" data-index="${index}">Eliminar</button>
+        </div>
+      `;
+    }
+
+    function renderNav() {
+      const items = state.config.brand.nav;
+      ids.navList.innerHTML = "";
+
+      items.forEach((item, index) => {
+        const row = document.createElement("article");
+        row.className = "repeat-item";
+        row.dataset.index = String(index);
+        row.innerHTML = `
+          <div class="repeat-head">
+            <span>Item #${index + 1}</span>
+            ${createRowActions("nav", index, items.length)}
+          </div>
+          <div class="repeat-fields two">
+            <div class="field">
+              <label class="label">Texto</label>
+              <input class="input" data-field="label" value="${item.label || ""}" />
+            </div>
+            <div class="field">
+              <label class="label">Href</label>
+              <input class="input" data-field="href" value="${item.href || "#"}" />
+            </div>
+          </div>
+        `;
+        ids.navList.appendChild(row);
+      });
+    }
+
+    function renderMetrics() {
+      const items = state.config.radar.metrics;
+      ids.metricsList.innerHTML = "";
+
+      items.forEach((item, index) => {
+        const row = document.createElement("article");
+        row.className = "repeat-item";
+        row.dataset.index = String(index);
+        row.innerHTML = `
+          <div class="repeat-head">
+            <span>Métrica #${index + 1}</span>
+            ${createRowActions("metrics", index, items.length)}
+          </div>
+          <div class="repeat-fields two">
+            <div class="field"><label class="label">Label</label><input class="input" data-field="label" value="${item.label || ""}" /></div>
+            <div class="field"><label class="label">Valor mostrado</label><input class="input" data-field="value" value="${item.value || ""}" /></div>
+            <div class="field"><label class="label">Fill (%)</label><input class="input" type="number" min="0" max="100" data-field="fill" value="${Number(item.fill) || 0}" /></div>
+            <div class="field">
+              <label class="label">Color</label>
+              <select class="select" data-field="color">
+                <option value="orange" ${item.color === "orange" ? "selected" : ""}>Orange</option>
+                <option value="pink" ${item.color === "pink" ? "selected" : ""}>Pink</option>
+                <option value="cyan" ${item.color === "cyan" ? "selected" : ""}>Cyan</option>
+                <option value="green" ${item.color === "green" ? "selected" : ""}>Green</option>
+              </select>
+            </div>
+          </div>
+        `;
+        ids.metricsList.appendChild(row);
+      });
+    }
+
+    function renderProjects() {
+      const items = state.config.projects;
+      ids.projectsList.innerHTML = "";
+
+      items.forEach((item, index) => {
+        const row = document.createElement("article");
+        row.className = "repeat-item";
+        row.dataset.index = String(index);
+        row.innerHTML = `
+          <div class="repeat-head">
+            <span>Proyecto #${index + 1}</span>
+            ${createRowActions("projects", index, items.length)}
+          </div>
+          <div class="repeat-fields two">
+            <div class="field"><label class="label">Título</label><input class="input" data-field="title" value="${item.title || ""}" /></div>
+            <div class="field"><label class="label">ID (slug)</label><input class="input" data-field="id" value="${item.id || ""}" /></div>
+            <div class="field" style="grid-column:1/-1;"><label class="label">Descripción</label><textarea class="textarea" data-field="description">${item.description || ""}</textarea></div>
+            <div class="field"><label class="label">URL imagen portada</label><input class="input" data-field="imageUrl" value="${item.imageUrl || ""}" /></div>
+            <div class="field"><label class="label">URL video portada (opcional)</label><input class="input" data-field="videoUrl" placeholder=".mp4 o .webm" value="${item.videoUrl || ""}" /></div>
+            <div class="field"><label class="label">Tags (coma)</label><input class="input" data-field="tags" value="${Array.isArray(item.tags) ? item.tags.join(", ") : ""}" /></div>
+            <div class="field"><label class="label">URL página (link card)</label><input class="input" data-field="linkUrl" value="${item.linkUrl || "https://example.com"}" /></div>
+          </div>
+        `;
+        ids.projectsList.appendChild(row);
+      });
+    }
+
+    function renderInsightsMetrics() {
+      const items = state.config.insightsMetrics;
+      ids.insightsMetricsList.innerHTML = "";
+
+      items.forEach((item, index) => {
+        const row = document.createElement("article");
+        row.className = "repeat-item";
+        row.dataset.index = String(index);
+        row.innerHTML = `
+          <div class="repeat-head">
+            <span>Resultado #${index + 1}</span>
+            ${createRowActions("insightsMetrics", index, items.length)}
+          </div>
+          <div class="repeat-fields two">
+            <div class="field"><label class="label">Label</label><input class="input" data-field="label" value="${item.label || ""}" /></div>
+            <div class="field"><label class="label">Valor principal</label><input class="input" data-field="value" value="${item.value || ""}" /></div>
+            <div class="field"><label class="label">Delta / cambio</label><input class="input" data-field="delta" value="${item.delta || ""}" /></div>
+            <div class="field"><label class="label">Contexto</label><input class="input" data-field="context" value="${item.context || ""}" /></div>
+          </div>
+        `;
+        ids.insightsMetricsList.appendChild(row);
+      });
+    }
+
+    function renderAiActions() {
+      const items = state.config.aiLoop.actions;
+      ids.aiActionsList.innerHTML = "";
+
+      items.forEach((item, index) => {
+        const row = document.createElement("article");
+        row.className = "repeat-item";
+        row.dataset.index = String(index);
+        row.innerHTML = `
+          <div class="repeat-head">
+            <span>Acción IA #${index + 1}</span>
+            ${createRowActions("aiActions", index, items.length)}
+          </div>
+          <div class="repeat-fields two">
+            <div class="field"><label class="label">Trigger</label><input class="input" data-field="trigger" value="${item.trigger || ""}" /></div>
+            <div class="field"><label class="label">Impacto esperado</label><input class="input" data-field="impact" value="${item.impact || ""}" /></div>
+            <div class="field" style="grid-column:1/-1;"><label class="label">Acción</label><textarea class="textarea" data-field="action">${item.action || ""}</textarea></div>
+          </div>
+        `;
+        ids.aiActionsList.appendChild(row);
+      });
+    }
+
+    function renderPlans() {
+      const items = state.config.pricingPlans;
+      ids.plansList.innerHTML = "";
+
+      items.forEach((item, index) => {
+        const row = document.createElement("article");
+        row.className = "repeat-item";
+        row.dataset.index = String(index);
+        row.innerHTML = `
+          <div class="repeat-head">
+            <span>Plan #${index + 1}</span>
+            ${createRowActions("plans", index, items.length)}
+          </div>
+          <div class="repeat-fields two">
+            <div class="field"><label class="label">Badge</label><input class="input" data-field="badge" value="${item.badge || ""}" /></div>
+            <div class="field"><label class="label">Título</label><input class="input" data-field="title" value="${item.title || ""}" /></div>
+            <div class="field"><label class="label">Precio</label><input class="input" data-field="price" value="${item.price || ""}" /></div>
+            <div class="field"><label class="label">Sufijo precio</label><input class="input" data-field="priceSuffix" value="${item.priceSuffix || ""}" /></div>
+            <div class="field" style="grid-column:1/-1;"><label class="label">Descripción</label><textarea class="textarea" data-field="description">${item.description || ""}</textarea></div>
+            <div class="field" style="grid-column:1/-1;"><label class="label">Features (una por línea)</label><textarea class="textarea" data-field="features">${Array.isArray(item.features) ? item.features.join("\n") : ""}</textarea></div>
+            <div class="field"><label class="label">Destacado</label><select class="select" data-field="featured"><option value="true" ${item.featured ? "selected" : ""}>Sí</option><option value="false" ${!item.featured ? "selected" : ""}>No</option></select></div>
+          </div>
+        `;
+        ids.plansList.appendChild(row);
+      });
+    }
+
+    function renderSteps() {
+      const items = state.config.processSteps;
+      ids.stepsList.innerHTML = "";
+
+      items.forEach((item, index) => {
+        const row = document.createElement("article");
+        row.className = "repeat-item";
+        row.dataset.index = String(index);
+        row.innerHTML = `
+          <div class="repeat-head">
+            <span>Paso #${index + 1}</span>
+            ${createRowActions("steps", index, items.length)}
+          </div>
+          <div class="repeat-fields two">
+            <div class="field"><label class="label">Título</label><input class="input" data-field="title" value="${item.title || ""}" /></div>
+            <div class="field"><label class="label">Descripción</label><textarea class="textarea" data-field="description">${item.description || ""}</textarea></div>
+          </div>
+        `;
+        ids.stepsList.appendChild(row);
+      });
+    }
+
+    function renderRepeaters() {
+      renderNav();
+      renderMetrics();
+      renderProjects();
+      renderInsightsMetrics();
+      renderAiActions();
+      renderPlans();
+      renderSteps();
+    }
+
+    function renderAll() {
+      renderSimpleFields();
+      renderRepeaters();
+    }
+
+    function getSectionArray(section) {
+      switch (section) {
+        case "nav":
+          return state.config.brand.nav;
+        case "metrics":
+          return state.config.radar.metrics;
+        case "projects":
+          return state.config.projects;
+        case "insightsMetrics":
+          return state.config.insightsMetrics;
+        case "aiActions":
+          return state.config.aiLoop.actions;
+        case "plans":
+          return state.config.pricingPlans;
+        case "steps":
+          return state.config.processSteps;
+        default:
+          return [];
+      }
+    }
+
+    function createDefaultItem(section) {
+      switch (section) {
+        case "nav":
+          return { label: "Nuevo", href: "#" };
+        case "metrics":
+          return { label: "Métrica", value: "0%", fill: 0, color: "orange" };
+        case "projects":
+          return {
+            id: "nuevo-proyecto",
+            title: "Nuevo proyecto",
+            description: "",
+            imageUrl: "https://images.unsplash.com/photo-1556155092-490a1ba16284?auto=format&fit=crop&w=1200&q=80",
+            videoUrl: "",
+            tags: [],
+            linkUrl: "https://example.com"
+          };
+        case "insightsMetrics":
+          return {
+            label: "Nueva métrica",
+            value: "0%",
+            delta: "sin cambio",
+            context: "Descripción breve"
+          };
+        case "aiActions":
+          return {
+            trigger: "Condición",
+            action: "Acción recomendada por IA",
+            impact: "Impacto esperado"
+          };
+        case "plans":
+          return {
+            badge: "Nuevo",
+            title: "Plan",
+            price: "USD 0",
+            priceSuffix: "pago único",
+            description: "",
+            features: [],
+            featured: false
+          };
+        case "steps":
+          return { title: "Nuevo paso", description: "" };
+        default:
+          return {};
+      }
+    }
+
+    function parseFieldValue(section, field, rawValue) {
+      if (section === "metrics" && field === "fill") {
+        const value = Number(rawValue);
+        if (Number.isNaN(value)) return 0;
+        return Math.max(0, Math.min(100, value));
+      }
+
+      if (section === "projects" && field === "tags") {
+        return String(rawValue)
+          .split(",")
+          .map((tag) => tag.trim())
+          .filter(Boolean)
+          .slice(0, 8);
+      }
+
+      if (section === "plans" && field === "features") {
+        return String(rawValue)
+          .split("\n")
+          .map((feature) => feature.trim())
+          .filter(Boolean)
+          .slice(0, 12);
+      }
+
+      if (section === "plans" && field === "featured") {
+        return rawValue === "true";
+      }
+
+      return String(rawValue);
+    }
+
+    function handleRepeaterInput(event) {
+      const container = event.currentTarget;
+      const section = container.dataset.section;
+      const fieldInput = event.target.closest("[data-field]");
+      if (!fieldInput) return;
+
+      const row = fieldInput.closest("[data-index]");
+      if (!row) return;
+
+      const index = Number(row.dataset.index);
+      const field = fieldInput.dataset.field;
+      const array = getSectionArray(section);
+
+      if (!array[index]) return;
+
+      array[index][field] = parseFieldValue(section, field, fieldInput.value);
+    }
+
+    function handleRepeaterAction(event) {
+      const button = event.target.closest("button[data-action]");
+      if (!button) return;
+
+      const action = button.dataset.action;
+      const section = button.dataset.section;
+      const index = Number(button.dataset.index);
+      const array = getSectionArray(section);
+
+      if (!array.length || Number.isNaN(index)) return;
+
+      if (action === "delete") {
+        array.splice(index, 1);
+      }
+
+      if (action === "up" && index > 0) {
+        const temp = array[index - 1];
+        array[index - 1] = array[index];
+        array[index] = temp;
+      }
+
+      if (action === "down" && index < array.length - 1) {
+        const temp = array[index + 1];
+        array[index + 1] = array[index];
+        array[index] = temp;
+      }
+
+      renderRepeaters();
+    }
+
+    function bindSimpleInputs() {
+      document.querySelectorAll("[data-path]").forEach((input) => {
+        input.addEventListener("input", () => {
+          const path = input.dataset.path;
+          const type = input.dataset.type || "text";
+          let value = input.value;
+
+          if (type === "chips") {
+            value = value
+              .split(",")
+              .map((chip) => chip.trim())
+              .filter(Boolean)
+              .slice(0, 8);
+          }
+
+          setByPath(state.config, path, value);
+        });
+      });
+    }
+
+    async function fetchRemoteConfig() {
+      try {
+        const response = await fetch("/api/get-config", {
+          headers: { Accept: "application/json" },
+          cache: "no-store",
+        });
+
+        if (!response.ok) {
+          return null;
+        }
+
+        const payload = await response.json();
+        return {
+          config: payload?.config || null,
+          projects: Array.isArray(payload?.projects) ? payload.projects : null,
+        };
+      } catch (_err) {
+        return null;
+      }
+    }
+
+    async function loadInitialConfig() {
+      const remote = await fetchRemoteConfig();
+      const draft = loadDraft();
+
+      if (draft) {
+        state.config = normalizeConfig(draft);
+        return;
+      }
+
+      state.config = normalizeConfig(remote?.config, remote?.projects);
+    }
+
+    function sanitizeConfig(config) {
+      const clean = normalizeConfig(config);
+
+      clean.projects = clean.projects.map((project, index) => {
+        const title = String(project.title || `Proyecto ${index + 1}`).trim();
+        const id = String(project.id || title)
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "") || `proyecto-${index + 1}`;
+
+        return {
+          id,
+          title,
+          description: String(project.description || "").trim(),
+          imageUrl: String(project.imageUrl || "").trim(),
+          videoUrl: String(project.videoUrl || "").trim(),
+          tags: Array.isArray(project.tags)
+            ? project.tags.map((tag) => String(tag).trim()).filter(Boolean).slice(0, 8)
+            : [],
+          linkUrl: String(project.linkUrl || "https://example.com").trim(),
+        };
+      });
+
+      clean.insightsMetrics = clean.insightsMetrics
+        .map((item) => ({
+          label: String(item.label || "").trim(),
+          value: String(item.value || "").trim(),
+          delta: String(item.delta || "").trim(),
+          context: String(item.context || "").trim(),
+        }))
+        .filter((item) => item.label || item.value)
+        .slice(0, 8);
+
+      clean.aiLoop = {
+        title: String(clean.aiLoop?.title || "").trim(),
+        period: String(clean.aiLoop?.period || "").trim(),
+        actions: Array.isArray(clean.aiLoop?.actions)
+          ? clean.aiLoop.actions
+              .map((item) => ({
+                trigger: String(item.trigger || "").trim(),
+                action: String(item.action || "").trim(),
+                impact: String(item.impact || "").trim(),
+              }))
+              .filter((item) => item.trigger || item.action || item.impact)
+              .slice(0, 10)
+          : [],
+      };
+
+      return clean;
+    }
+
+    async function publishChanges() {
+      if (!state.password) {
+        showToast("Sesión inválida");
+        return;
+      }
+
+      const config = sanitizeConfig(state.config);
+
+      ids.publishBtn.disabled = true;
+      ids.publishBtnBottom.disabled = true;
+      ids.publishBtn.textContent = "Publicando...";
+      ids.publishBtnBottom.textContent = "Publicando...";
+
+      try {
+        const response = await fetch("/api/save-config", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            password: state.password,
+            config,
+          }),
+        });
+
+        if (response.status === 401) {
+          showToast("Contraseña incorrecta");
+          return;
+        }
+
+        if (!response.ok) {
+          showToast("No se pudo publicar");
+          return;
+        }
+
+        state.config = config;
+        saveDraft(config);
+        renderAll();
+        showToast("Cambios publicados");
+      } catch (_err) {
+        showToast("Error de red al publicar");
+      } finally {
+        ids.publishBtn.disabled = false;
+        ids.publishBtnBottom.disabled = false;
+        ids.publishBtn.textContent = "Publicar cambios";
+        ids.publishBtnBottom.textContent = "Publicar cambios";
+      }
+    }
+
+    async function enterAdmin() {
+      ids.loginErr.classList.remove("show");
+      const password = ids.password.value.trim();
+
+      if (!password) {
+        ids.loginErr.textContent = "Ingresa la contraseña";
+        ids.loginErr.classList.add("show");
+        return;
+      }
+
+      state.password = password;
+      ids.loginBtn.disabled = true;
+      ids.loginBtn.textContent = "Cargando...";
+
+      await loadInitialConfig();
+      renderAll();
+
+      ids.login.style.display = "none";
+      ids.app.style.display = "block";
+      ids.loginBtn.disabled = false;
+      ids.loginBtn.textContent = "Entrar al admin";
+      showToast("Admin listo");
+    }
+
+    ids.loginBtn.addEventListener("click", enterAdmin);
+    ids.password.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        enterAdmin();
+      }
+    });
+
+    bindSimpleInputs();
+
+    [ids.navList, ids.metricsList, ids.projectsList, ids.insightsMetricsList, ids.aiActionsList, ids.plansList, ids.stepsList].forEach((container) => {
+      container.addEventListener("input", handleRepeaterInput);
+      container.addEventListener("click", handleRepeaterAction);
+    });
+
+    ids.addNavBtn.addEventListener("click", () => {
+      state.config.brand.nav.push(createDefaultItem("nav"));
+      renderNav();
+    });
+
+    ids.addMetricBtn.addEventListener("click", () => {
+      state.config.radar.metrics.push(createDefaultItem("metrics"));
+      renderMetrics();
+    });
+
+    ids.addProjectBtn.addEventListener("click", () => {
+      state.config.projects.push(createDefaultItem("projects"));
+      renderProjects();
+    });
+
+    ids.addInsightsMetricBtn.addEventListener("click", () => {
+      state.config.insightsMetrics.push(createDefaultItem("insightsMetrics"));
+      renderInsightsMetrics();
+    });
+
+    ids.addAiActionBtn.addEventListener("click", () => {
+      state.config.aiLoop.actions.push(createDefaultItem("aiActions"));
+      renderAiActions();
+    });
+
+    ids.addPlanBtn.addEventListener("click", () => {
+      state.config.pricingPlans.push(createDefaultItem("plans"));
+      renderPlans();
+    });
+
+    ids.addStepBtn.addEventListener("click", () => {
+      state.config.processSteps.push(createDefaultItem("steps"));
+      renderSteps();
+    });
+
+    ids.reloadBtn.addEventListener("click", async () => {
+      const remote = await fetchRemoteConfig();
+      state.config = normalizeConfig(remote?.config, remote?.projects);
+      renderAll();
+      showToast("Config remota cargada");
+    });
+
+    ids.restoreBtn.addEventListener("click", () => {
+      state.config = getDefaults();
+      renderAll();
+      showToast("Default restaurado");
+    });
+
+    ids.saveDraftBtn.addEventListener("click", () => {
+      saveDraft(state.config);
+      showToast("Borrador guardado");
+    });
+
+    ids.loadDraftBtn.addEventListener("click", () => {
+      const draft = loadDraft();
+      if (!draft) {
+        showToast("No hay borrador");
+        return;
+      }
+      state.config = normalizeConfig(draft);
+      renderAll();
+      showToast("Borrador cargado");
+    });
+
+    ids.clearDraftBtn.addEventListener("click", () => {
+      clearDraft();
+      showToast("Borrador eliminado");
+    });
+
+    ids.publishBtn.addEventListener("click", publishChanges);
+    ids.publishBtnBottom.addEventListener("click", publishChanges);
+
+    ids.logoutBtn.addEventListener("click", () => {
+      state.password = "";
+      ids.password.value = "";
+      ids.login.style.display = "grid";
+      ids.app.style.display = "none";
+      showToast("Sesión cerrada");
+    });
+  </script>
+</body>
+</html>
