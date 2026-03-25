@@ -222,9 +222,9 @@ window.PONLO_DEFAULT_CONFIG = {
     },
     secondaryCta: {
       label: "Correo",
-      url: "mailto:sebas@ponlonline.com"
+      url: "mailto:ponlonline.web@gmail.com"
     },
-    chips: ["+58 412-123-4567", "sebas@ponlonline.com", "Venezuela"]
+    chips: ["+58 412-123-4567", "ponlonline.web@gmail.com", "Venezuela"]
   },
   paymentMethods: [
     { name: "Pago Móvil", icon: "pago-movil" },
