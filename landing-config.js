@@ -46,7 +46,7 @@ window.PONLO_DEFAULT_CONFIG = {
   insightsSection: {
     heading: "Lo que incluye cada web de Ponlonline",
     description:
-      "No es solo una página bonita: cada sitio viene con panel admin, WhatsApp integrado, hosting incluido y la velocidad que tus clientes necesitan."
+      "No es solo una página bonita: cada sitio viene con SEO, analíticas, panel admin, WhatsApp integrado, hosting incluido y la velocidad que tus clientes necesitan."
   },
   insightsMetrics: [
     {
@@ -56,10 +56,10 @@ window.PONLO_DEFAULT_CONFIG = {
       context: "Tu web lista en 2 días, no en 2 meses como otras agencias"
     },
     {
-      label: "Panel admin incluido",
-      value: "Edita tú",
-      delta: "Sin depender de nadie",
-      context: "Cambia textos, fotos, precios y productos cuando quieras"
+      label: "SEO + Analytics",
+      value: "Incluido",
+      delta: "Aparece en Google",
+      context: "SEO optimizado, Google Analytics y Meta Pixel configurados desde el día 1"
     },
     {
       label: "Velocidad de carga",
@@ -150,7 +150,8 @@ window.PONLO_DEFAULT_CONFIG = {
         "Diseño mobile-first optimizado",
         "Botón de WhatsApp integrado",
         "Hosting + dominio incluido",
-        "Link listo para tu bio de Instagram",
+        "SEO básico (meta tags + Schema.org)",
+        "Google Analytics incluido",
         "Soporte por WhatsApp"
       ],
       featured: false
@@ -162,12 +163,13 @@ window.PONLO_DEFAULT_CONFIG = {
       priceSuffix: "único + USD 45/mes",
       description: "Para negocios que quieren aparecer en Google y tener su catálogo online.",
       features: [
-        "Sitio completo (5-8 páginas)",
+        "Sitio completo (5-8 secciones)",
         "Panel admin — edita tú mismo sin código",
         "Catálogo de productos o servicios",
-        "Google Analytics + reporte mensual",
-        "SEO para Google y buscadores IA",
-        "Google My Business configurado"
+        "SEO completo + Google My Business configurado",
+        "Google Analytics + Meta Pixel instalados",
+        "Sitemap + robots.txt optimizados",
+        "Reporte mensual de visitas"
       ],
       featured: true
     },
@@ -180,10 +182,10 @@ window.PONLO_DEFAULT_CONFIG = {
       features: [
         "Todo lo del plan Negocio",
         "Sistema de pedidos y cotizaciones online",
-        "Pagos integrados (Pago Móvil, Zelle, USDT)",
         "WhatsApp automático con detalle del pedido",
         "Galería con filtros y búsqueda",
-        "Analíticas de ventas + soporte prioritario"
+        "Google Ads + Meta Ads tracking configurado",
+        "Soporte prioritario + analíticas de ventas"
       ],
       featured: false
     }
