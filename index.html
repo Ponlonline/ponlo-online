@@ -1146,6 +1146,47 @@
       background: rgba(255, 255, 255, 0.05);
     }
 
+    .payment-methods {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .payment-methods .pm-label {
+      font-size: 0.78rem;
+      color: #7a89a8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    .payment-methods .pm-icons {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .payment-methods .pm-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 5px 12px;
+      background: rgba(255, 255, 255, 0.04);
+      font-size: 0.78rem;
+      color: #9eacca;
+    }
+
+    .payment-methods .pm-item svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
     footer {
       padding: 22px 0 34px;
       color: #97a4c4;
@@ -1439,6 +1480,7 @@
             <a id="ctaSecondary" class="pill pill-outline" href="#">Correo</a>
           </div>
           <div id="ctaChips" class="contact-mini" style="margin-top:12px;"></div>
+          <div id="paymentMethods" class="payment-methods" style="margin-top:18px;"></div>
         </div>
       </div>
     </section>
@@ -1710,6 +1752,20 @@
         span.textContent = safe(chip);
         ctaChips.appendChild(span);
       });
+
+      // Payment methods
+      const pmIcons = {
+        "pago-movil": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18.01"/><path d="M9 9l2 2 4-4"/></svg>`,
+        "binance": `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L6.5 7.5 8.36 9.36 12 5.72l3.64 3.64L17.5 7.5 12 2zm-7.5 10L2 14.5 4.5 17 7 14.5 4.5 12zm15 0L17 14.5 19.5 17 22 14.5 19.5 12zM12 9.28L8.36 12.92 6.5 11.06 12 5.56l5.5 5.5-1.86 1.86L12 9.28zM12 14.72l3.64-3.64 1.86 1.86L12 18.44l-5.5-5.5 1.86-1.86L12 14.72z"/></svg>`,
+        "zelle": `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.559 24h-2.841c-.971 0-1.392-.394-1.392-1.252V18.6H4.876c-.86 0-1.308-.404-1.308-1.252v-2.14c0-.556.168-.893.727-1.384L14.23 4.452H4.876c-.86 0-1.308-.404-1.308-1.252V1.252C3.568.394 3.989 0 4.876 0h13.799c.86 0 1.308.404 1.308 1.252V3.2c0 .556-.168.893-.727 1.384L9.322 13.956h5.153c0-.005 0 .005 0 0h4.2c.86 0 1.308.404 1.308 1.252v2.14c0 .556-.168.893-.727 1.384l-.581.527v3.489c0 .858-.421 1.252-1.392 1.252h-.283V18.6h-3.44v5.4z"/></svg>`
+      };
+      const pmContainer = document.getElementById("paymentMethods");
+      const methods = config.paymentMethods || [];
+      if (methods.length > 0) {
+        pmContainer.innerHTML = `<span class="pm-label">Aceptamos</span><div class="pm-icons">${methods.map(m =>
+          `<span class="pm-item">${pmIcons[m.icon] || ""}${safe(m.name)}</span>`
+        ).join("")}</div>`;
+      }
 
       const footerTemplate = safe(config.footerText, "Ponlonline · {{year}}");
       document.getElementById("footerText").textContent = footerTemplate.replaceAll("{{year}}", String(currentYear));
