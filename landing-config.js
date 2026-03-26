@@ -6,12 +6,12 @@ window.PONLO_DEFAULT_CONFIG = {
       { label: "Inicio", href: "#inicio" },
       { label: "Resultados", href: "#resultados" },
       { label: "Proyectos", href: "#proyectos" },
-      { label: "Precios", href: "#precios" },
+      { label: "Precio", href: "#precios" },
       { label: "Contacto", href: "#contacto" }
     ],
     headerButton: {
       label: "WhatsApp",
-      url: "https://wa.me/584121234567?text=Hola,%20quiero%20una%20web%20premium%20para%20mi%20negocio"
+      url: "https://wa.me/584121234567?text=Hola,%20quiero%20una%20web%20profesional%20para%20mi%20negocio"
     }
   },
   hero: {
@@ -19,13 +19,13 @@ window.PONLO_DEFAULT_CONFIG = {
     title: "Tu negocio abierto 24/7, visible en Google y WhatsApp.",
     slogan: "Ponlonline crea tu web profesional, te pone en Google y conecta tus clientes directo a WhatsApp.",
     description:
-      "Diseñamos páginas rápidas y profesionales para emprendedores que quieren dejar de depender solo de Instagram. Con panel admin para que edites tu contenido, analíticas para medir resultados y botón de WhatsApp para cerrar ventas.",
+      "Diseñamos páginas rápidas y profesionales para emprendedores que quieren dejar de depender solo de Instagram. Con panel admin para que edites tu contenido, analíticas de Google para medir resultados y botón de WhatsApp para cerrar ventas.",
     primaryCta: {
       label: "Quiero mi web",
       url: "https://wa.me/584121234567?text=Hola,%20quiero%20mi%20web%20con%20Ponlonline"
     },
     secondaryCta: {
-      label: "Ver paquetes",
+      label: "Ver qué incluye",
       url: "#precios"
     }
   },
@@ -44,22 +44,22 @@ window.PONLO_DEFAULT_CONFIG = {
       "Sitios web reales que hemos creado para negocios en Venezuela y Latinoamérica. Cada uno diseñado para convertir visitantes en clientes."
   },
   insightsSection: {
-    heading: "Lo que incluye cada web de Ponlonline",
+    heading: "Lo que incluye tu web con Ponlonline",
     description:
-      "No es solo una página bonita: cada sitio viene con SEO, analíticas, panel admin, WhatsApp integrado, hosting incluido y la velocidad que tus clientes necesitan."
+      "No es solo una página bonita: cada sitio viene con SEO, analíticas de Google, panel admin, WhatsApp integrado, dominio propio y la velocidad que tus clientes necesitan."
   },
   insightsMetrics: [
     {
       label: "Tiempo de entrega",
-      value: "48 hrs",
-      delta: "No semanas",
-      context: "Tu web lista en 2 días, no en 2 meses como otras agencias"
+      value: "72 hrs",
+      delta: "No 2 semanas",
+      context: "Tu web lista en 3 días, no en 2 semanas como otras agencias"
     },
     {
       label: "SEO + Analytics",
       value: "Incluido",
       delta: "Aparece en Google",
-      context: "SEO optimizado, Google Analytics y Meta Pixel configurados desde el día 1"
+      context: "SEO optimizado y Google Analytics configurados desde el día 1"
     },
     {
       label: "Velocidad de carga",
@@ -70,8 +70,8 @@ window.PONLO_DEFAULT_CONFIG = {
     {
       label: "Todo incluido",
       value: "0 sorpresas",
-      delta: "Hosting + dominio + soporte",
-      context: "Un solo pago mensual y nosotros nos encargamos de todo"
+      delta: "Dominio + hosting + soporte",
+      context: "Un solo pago y nosotros nos encargamos de todo"
     }
   ],
   aiLoop: {
@@ -134,60 +134,31 @@ window.PONLO_DEFAULT_CONFIG = {
     }
   ],
   pricingSection: {
-    heading: "Planes para cada etapa de tu negocio",
+    heading: "Todo lo que necesitas por un solo precio",
     description:
-      "Empieza con lo que necesitas hoy y crece cuando estés listo. Sin contratos largos, sin sorpresas, todo incluido."
+      "Sin planes complicados ni letras pequeñas. Un precio base que incluye todo para lanzar tu negocio online. ¿Necesitas algo extra? Lo conversamos y ajustamos."
   },
   pricingPlans: [
     {
-      badge: "Starter",
-      title: "Presencia",
+      badge: "Plan único",
+      title: "Tu Web Profesional",
       price: "USD 150",
-      priceSuffix: "único + USD 20/mes",
-      description: "Para emprendedores que quieren verse profesionales y tener su link propio.",
+      priceSuffix: "precio base",
+      description: "Todo lo que tu negocio necesita para estar online y empezar a vender. Si tienes exigencias adicionales, ajustamos el precio según la complejidad.",
       features: [
-        "Landing page profesional (1-3 secciones)",
-        "Diseño mobile-first optimizado",
+        "Landing page profesional personalizada",
+        "Panel admin — edita tu contenido sin código",
+        "Dominio propio incluido (.com, .net, etc.)",
+        "SEO optimizado (meta tags, Open Graph, sitemap)",
+        "Google Analytics configurado",
         "Botón de WhatsApp integrado",
-        "Hosting + dominio incluido",
-        "SEO básico (meta tags + Schema.org)",
-        "Google Analytics incluido",
+        "Google Maps si tienes tienda física",
+        "Diseño mobile-first (se ve perfecto en celular)",
+        "Hosting incluido",
+        "Entrega en 72 horas",
         "Soporte por WhatsApp"
       ],
-      featured: false
-    },
-    {
-      badge: "Más vendido",
-      title: "Negocio",
-      price: "USD 350",
-      priceSuffix: "único + USD 45/mes",
-      description: "Para negocios que quieren aparecer en Google y tener su catálogo online.",
-      features: [
-        "Sitio completo (5-8 secciones)",
-        "Panel admin — edita tú mismo sin código",
-        "Catálogo de productos o servicios",
-        "SEO completo + Google My Business configurado",
-        "Google Analytics + Meta Pixel instalados",
-        "Sitemap + robots.txt optimizados",
-        "Reporte mensual de visitas"
-      ],
       featured: true
-    },
-    {
-      badge: "Pro",
-      title: "Tienda",
-      price: "USD 700",
-      priceSuffix: "único + USD 75/mes",
-      description: "Para negocios que quieren recibir pedidos y vender online 24/7.",
-      features: [
-        "Todo lo del plan Negocio",
-        "Sistema de pedidos y cotizaciones online",
-        "WhatsApp automático con detalle del pedido",
-        "Galería con filtros y búsqueda",
-        "Google Ads + Meta Ads tracking configurado",
-        "Soporte prioritario + analíticas de ventas"
-      ],
-      featured: false
     }
   ],
   processSection: {
@@ -201,21 +172,21 @@ window.PONLO_DEFAULT_CONFIG = {
     },
     {
       title: "Diseñamos tu web",
-      description: "En 48 horas tienes tu sitio listo para revisar, con tu marca y tu catálogo."
+      description: "En 72 horas tienes tu sitio listo para revisar, con tu marca y tu catálogo."
     },
     {
       title: "Publicamos y conectamos",
       description: "Activamos tu dominio, Google Analytics, WhatsApp y tu panel para editar contenido."
     },
     {
-      title: "Creces con datos",
-      description: "Cada mes recibes un reporte de visitas y te ayudamos a mejorar lo que haga falta."
+      title: "Tú decides si necesitas más",
+      description: "Si quieres funcionalidades extra, lo conversamos y ajustamos el precio. Sin presiones."
     }
   ],
   cta: {
     heading: "¿Listo para que tu negocio tenga su propia web profesional?",
     description:
-      "Escríbenos por WhatsApp, cuéntanos qué vendes y en 48 horas tienes tu sitio listo. Sin complicaciones, sin letra pequeña.",
+      "Escríbenos por WhatsApp, cuéntanos qué vendes y en 72 horas tienes tu sitio listo. Sin complicaciones, sin letra pequeña.",
     primaryCta: {
       label: "WhatsApp",
       url: "https://wa.me/584121234567?text=Hola,%20quiero%20mi%20web%20con%20Ponlonline"
