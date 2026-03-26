@@ -40,6 +40,7 @@
 
     html {
       scroll-behavior: smooth;
+      font-size: clamp(15px, calc(0.625rem + 0.45vw), 18px);
     }
 
     body {
@@ -419,6 +420,13 @@
       box-shadow: var(--shadow);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+
+    .glass:not(.topbar):not(.status-card):not(.cta-panel):not(.price-card):hover {
+      transform: translateY(-4px);
+      box-shadow: 0 28px 65px rgba(0, 0, 0, 0.5), 0 0 24px rgba(143, 105, 255, 0.12);
+      border-color: rgba(143, 105, 255, 0.35);
     }
 
     .top-wrap {
@@ -528,7 +536,7 @@
     }
 
     .hero {
-      padding: 52px 0 34px;
+      padding: 52px 0 48px;
       min-height: calc(100svh - 86px);
       display: flex;
       align-items: center;
@@ -570,11 +578,14 @@
     }
 
     h1 {
-      font-size: clamp(2.2rem, 6.8vw, 4.8rem);
+      font-size: clamp(2.4rem, 7.2vw, 5.2rem);
       margin-bottom: 10px;
-      color: #f7f9ff;
       max-width: 11ch;
       text-wrap: balance;
+      background: linear-gradient(135deg, #ffffff 0%, #a8c0ff 40%, #50d3ff 70%, #8f69ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .hero-slogan {
@@ -665,18 +676,31 @@
     }
 
     .section {
-      padding: 68px 0;
+      padding: 88px 0;
+      position: relative;
+    }
+
+    .section + .section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(600px, 80%);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(143, 105, 255, 0.4), rgba(80, 211, 255, 0.4), transparent);
     }
 
     .section-head {
-      margin-bottom: 22px;
+      margin-bottom: 32px;
     }
 
     .section-head h2 {
-      font-size: clamp(1.95rem, 4.8vw, 3.3rem);
+      font-size: clamp(2.1rem, 5.2vw, 3.6rem);
       margin-bottom: 9px;
       max-width: 20ch;
       color: #f6f9ff;
+      text-wrap: balance;
     }
 
     .section-head p {
@@ -1000,7 +1024,43 @@
 
     .price-card.featured {
       border: 1px solid rgba(143, 105, 255, 0.52);
-      box-shadow: 0 24px 60px rgba(143, 105, 255, 0.18);
+      box-shadow: 0 24px 60px rgba(143, 105, 255, 0.18), 0 0 40px rgba(80, 211, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .price-card.featured::before {
+      content: "";
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      border-radius: inherit;
+      background: conic-gradient(from var(--glow-angle, 0deg), rgba(143, 105, 255, 0.6), rgba(80, 211, 255, 0.6), rgba(255, 91, 214, 0.4), rgba(143, 105, 255, 0.6));
+      z-index: -1;
+      animation: glowRotate 4s linear infinite;
+      opacity: 0.7;
+    }
+
+    .price-card.featured::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: inherit;
+      background: linear-gradient(130deg, rgba(22, 30, 55, 0.95), rgba(8, 12, 24, 0.98));
+      z-index: -1;
+    }
+
+    @keyframes glowRotate {
+      0% { --glow-angle: 0deg; }
+      100% { --glow-angle: 360deg; }
+    }
+
+    @property --glow-angle {
+      syntax: "<angle>";
+      initial-value: 0deg;
+      inherits: false;
     }
 
     .price-card h3 {
@@ -1083,7 +1143,7 @@
     }
 
     .cta {
-      padding-top: 82px;
+      padding-top: 100px;
     }
 
     .cta-panel {
@@ -1196,14 +1256,62 @@
 
     .reveal {
       opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.45s ease, transform 0.55s ease;
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-scale.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .stagger.visible > * { opacity: 1; transform: translateY(0); }
+    .stagger > * {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .stagger > *:nth-child(1) { transition-delay: 0.0s; }
+    .stagger > *:nth-child(2) { transition-delay: 0.08s; }
+    .stagger > *:nth-child(3) { transition-delay: 0.16s; }
+    .stagger > *:nth-child(4) { transition-delay: 0.24s; }
+    .stagger > *:nth-child(5) { transition-delay: 0.32s; }
+    .stagger > *:nth-child(6) { transition-delay: 0.40s; }
+    .stagger > *:nth-child(7) { transition-delay: 0.48s; }
+    .stagger > *:nth-child(8) { transition-delay: 0.56s; }
 
     .delay-1 { transition-delay: 0.07s; }
     .delay-2 { transition-delay: 0.14s; }
@@ -1425,7 +1533,7 @@
         </header>
 
         <div class="insights-grid">
-          <div id="insightsMetricsGrid" class="insight-metrics reveal"></div>
+          <div id="insightsMetricsGrid" class="insight-metrics stagger"></div>
 
           <aside class="ai-loop glass reveal delay-1">
             <div class="ai-loop-head">
@@ -1444,7 +1552,7 @@
           <h2 id="projectsHeading"></h2>
           <p id="projectsDescription"></p>
         </header>
-        <div id="projectsGrid" class="projects reveal"></div>
+        <div id="projectsGrid" class="projects stagger"></div>
       </div>
     </section>
 
@@ -1454,7 +1562,7 @@
           <h2 id="pricingHeading"></h2>
           <p id="pricingDescription"></p>
         </header>
-        <div id="pricingGrid" class="pricing-grid"></div>
+        <div id="pricingGrid" class="pricing-grid stagger"></div>
       </div>
     </section>
 
@@ -1464,7 +1572,7 @@
           <h2 id="processHeading"></h2>
           <p id="processDescription"></p>
         </header>
-        <div id="processGrid" class="flow"></div>
+        <div id="processGrid" class="flow stagger"></div>
       </div>
     </section>
 
@@ -1825,24 +1933,55 @@
 
     boot();
 
-    const reveals = document.querySelectorAll(".reveal");
+    const animatedEls = document.querySelectorAll(".reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger");
     const observer = new IntersectionObserver(
       (entries, obs) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            return;
-          }
+          if (!entry.isIntersecting) return;
           entry.target.classList.add("visible");
           obs.unobserve(entry.target);
         });
       },
       {
-        threshold: 0.14,
-        rootMargin: "0px 0px -8% 0px"
+        threshold: 0.12,
+        rootMargin: "0px 0px -6% 0px"
       }
     );
 
-    reveals.forEach((item) => observer.observe(item));
+    animatedEls.forEach((item) => observer.observe(item));
+
+    // Counter animation for insight values
+    function animateCounter(el) {
+      const text = el.textContent.trim();
+      const match = text.match(/^([<>]?\s*)(\d+)(.*)$/);
+      if (!match) return; // non-numeric like "Incluido"
+      const prefix = match[1];
+      const target = parseInt(match[2]);
+      const suffix = match[3];
+      const duration = 1200;
+      const start = performance.now();
+      el.textContent = prefix + "0" + suffix;
+      function tick(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+        const current = Math.round(target * eased);
+        el.textContent = prefix + current + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    const counterObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.querySelectorAll(".insight-value").forEach(animateCounter);
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.3 });
+
+    const metricsGrid = document.getElementById("insightsMetricsGrid");
+    if (metricsGrid) counterObserver.observe(metricsGrid);
   </script>
 </body>
 </html>
