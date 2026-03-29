@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const PORT = process.env.PORT || 8091;
+const PORT = process.env.PORT || 8092;
 const DIR = __dirname;
 const DATA_FILE = path.join(DIR, 'config.json');
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin2026';
