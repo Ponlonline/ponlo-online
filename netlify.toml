@@ -6,9 +6,6 @@
 [functions]
   node_bundler = "nft"
 
-[images]
-  remote_images = []
-
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
