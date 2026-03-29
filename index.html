@@ -574,23 +574,38 @@
       line-height: 1.5;
     }
 
-    /* PROJECTS */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(1, 1fr);
+    /* PROJECTS SLIDER */
+    .slider-wrapper {
+      position: relative;
+    }
+
+    .projects-slider {
+      display: flex;
       gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+      scrollbar-width: none;
+    }
+
+    .projects-slider::-webkit-scrollbar {
+      display: none;
     }
 
     .project-card {
+      flex: 0 0 85%;
+      max-width: 420px;
       border-radius: 20px;
       overflow: hidden;
       border: 1px solid var(--stroke);
       background: var(--card-bg);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      scroll-snap-align: start;
     }
 
     .project-card:hover {
-      transform: translateY(-3px);
       box-shadow: var(--card-shadow-hover);
     }
 
@@ -663,6 +678,69 @@
     }
 
     .project-link:hover { gap: 8px; }
+
+    /* Slider arrows */
+    .slider-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 24px;
+    }
+
+    .slider-dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .slider-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text);
+      opacity: 0.15;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .slider-dot.active {
+      opacity: 1;
+      width: 24px;
+      border-radius: 4px;
+      background: var(--accent);
+    }
+
+    .slider-arrows {
+      display: flex;
+      gap: 8px;
+    }
+
+    .slider-arrow {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1.5px solid var(--stroke);
+      background: var(--card-bg);
+      color: var(--text);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: all 0.25s ease;
+    }
+
+    .slider-arrow:hover {
+      border-color: var(--text);
+      background: var(--text);
+      color: var(--card-bg);
+    }
+
+    .slider-arrow:disabled {
+      opacity: 0.3;
+      cursor: default;
+      pointer-events: none;
+    }
 
     /* PRICING */
     .pricing-card {
@@ -944,7 +1022,7 @@
       .hero-grid { grid-template-columns: 1fr; }
       .bento-row { grid-template-columns: repeat(2, 1fr); }
       .features-grid { gap: 16px; }
-      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+      .project-card { flex: 0 0 46%; }
       .process-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
@@ -965,6 +1043,7 @@
     @media (min-width: 1024px) {
       .hero-main { padding: 64px 56px; min-height: 520px; }
       .cta-section { margin: 0 32px 48px; padding: 100px 0; }
+      .project-card { flex: 0 0 38%; }
     }
 
     @keyframes pricingGlow {
@@ -1140,7 +1219,20 @@
           <h2>Proyectos reales</h2>
           <p>Sitios web que hemos creado para negocios en Venezuela y Latinoamerica.</p>
         </div>
-        <div id="projectsGrid" class="projects-grid stagger"></div>
+        <div class="slider-wrapper reveal">
+          <div id="projectsSlider" class="projects-slider"></div>
+          <div class="slider-nav">
+            <div id="sliderDots" class="slider-dots"></div>
+            <div class="slider-arrows">
+              <button class="slider-arrow" id="sliderPrev" aria-label="Anterior">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button class="slider-arrow" id="sliderNext" aria-label="Siguiente">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1294,10 +1386,13 @@
         fg.appendChild(card);
       });
 
-      // Projects
-      const pg = document.getElementById("projectsGrid");
-      pg.innerHTML = "";
-      (config.projects || []).forEach(p => {
+      // Projects slider
+      const slider = document.getElementById("projectsSlider");
+      const dotsContainer = document.getElementById("sliderDots");
+      slider.innerHTML = "";
+      dotsContainer.innerHTML = "";
+      const projects = config.projects || [];
+      projects.forEach((p, i) => {
         const card = document.createElement("article");
         card.className = "project-card";
         const tagsHtml = (p.tags || []).map(t => `<span class="tag">${safe(t)}</span>`).join("");
@@ -1312,8 +1407,46 @@
             <a href="${safe(p.linkUrl, "#")}" target="_blank" rel="noopener" class="project-link">Ver proyecto →</a>
           </div>
         `;
-        pg.appendChild(card);
+        slider.appendChild(card);
+
+        const dot = document.createElement("button");
+        dot.className = "slider-dot" + (i === 0 ? " active" : "");
+        dot.setAttribute("aria-label", `Proyecto ${i + 1}`);
+        dot.addEventListener("click", () => {
+          card.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+        });
+        dotsContainer.appendChild(dot);
       });
+
+      // Slider navigation
+      const prevBtn = document.getElementById("sliderPrev");
+      const nextBtn = document.getElementById("sliderNext");
+      const cardWidth = () => slider.querySelector(".project-card")?.offsetWidth + 16 || 400;
+
+      prevBtn.addEventListener("click", () => {
+        slider.scrollBy({ left: -cardWidth(), behavior: "smooth" });
+      });
+      nextBtn.addEventListener("click", () => {
+        slider.scrollBy({ left: cardWidth(), behavior: "smooth" });
+      });
+
+      // Update dots and arrow states on scroll
+      slider.addEventListener("scroll", () => {
+        const cards = slider.querySelectorAll(".project-card");
+        const dots = dotsContainer.querySelectorAll(".slider-dot");
+        let activeIndex = 0;
+        const scrollLeft = slider.scrollLeft;
+        cards.forEach((card, i) => {
+          if (card.offsetLeft - slider.offsetLeft <= scrollLeft + 20) {
+            activeIndex = i;
+          }
+        });
+        dots.forEach((d, i) => d.classList.toggle("active", i === activeIndex));
+        prevBtn.disabled = scrollLeft <= 10;
+        nextBtn.disabled = scrollLeft + slider.clientWidth >= slider.scrollWidth - 10;
+      });
+      // Init arrow states
+      prevBtn.disabled = true;
 
       // Pricing
       const pr = config.pricing || {};
