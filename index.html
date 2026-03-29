@@ -1297,19 +1297,13 @@
       // Projects
       const pg = document.getElementById("projectsGrid");
       pg.innerHTML = "";
-      const defaultProjects = (window.PONLO_DEFAULT_CONFIG?.projects || []);
-      (config.projects || []).forEach((p, i) => {
+      (config.projects || []).forEach(p => {
         const card = document.createElement("article");
         card.className = "project-card";
         const tagsHtml = (p.tags || []).map(t => `<span class="tag">${safe(t)}</span>`).join("");
-        // Use local image if remote URL points to external screenshot service
-        let imgUrl = safe(p.imageUrl);
-        if (imgUrl.includes('thum.io') || imgUrl.includes('thumbnail')) {
-          imgUrl = defaultProjects[i]?.imageUrl || imgUrl;
-        }
         card.innerHTML = `
           <div class="project-img">
-            <img src="${imgUrl}" alt="${safe(p.title)}" loading="lazy" onload="this.classList.add('loaded')" />
+            <img src="${safe(p.imageUrl)}" alt="${safe(p.title)}" loading="lazy" onload="this.classList.add('loaded')" />
           </div>
           <div class="project-info">
             <h3>${safe(p.title)}</h3>
