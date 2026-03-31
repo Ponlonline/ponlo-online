@@ -102,7 +102,7 @@ window.PONLO_DEFAULT_CONFIG = {
     description: "Desde una web profesional hasta un sistema completo para tu negocio.",
     price: "150",
     features: [
-      "Tu negocio con presencia profesional en internet",
+      "Muestra lo que vendes de forma profesional y atractiva",
       "Tú mismo cambias textos y fotos cuando quieras",
       "Tu propia dirección web (.com, .net, etc.)",
       "Te encuentran desde Google, tu bio de IG o cualquier enlace",
