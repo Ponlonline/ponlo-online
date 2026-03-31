@@ -1,7 +1,7 @@
 window.PONLO_DEFAULT_CONFIG = {
   brand: {
     name: "ponlonline",
-    logoUrl: "favicon.svg",
+    logoUrl: "images/logo-p.png",
     nav: [
       { label: "Inicio", href: "#inicio" },
       { label: "Features", href: "#features" },

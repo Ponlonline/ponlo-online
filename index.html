@@ -11,7 +11,9 @@
   <meta property="og:url" content="https://ponlonline-v2.netlify.app" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+  <link rel="apple-touch-icon" href="images/favicon-192.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -23,9 +25,9 @@
       --bg-card: #f9f8fb;
       --text: #0a0a0a;
       --muted: #6b6b7b;
-      --accent: #f97066;
-      --accent-gradient: linear-gradient(135deg, #fbb1a8 0%, #f97066 50%, #e85d52 100%);
-      --accent-hover: #e85d52;
+      --accent: #6D28D9;
+      --accent-gradient: linear-gradient(135deg, #A78BFA 0%, #7C3AED 50%, #6D28D9 100%);
+      --accent-hover: #5B21B6;
       --stroke: rgba(0, 0, 0, 0.1);
       --card-bg: #ffffff;
       --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
@@ -37,8 +39,8 @@
       --badge-text: #5b4a8a;
       --footer-bg: #0a0a0a;
       --footer-text: #a0a0b0;
-      --violet: #6d28d9;
-      --violet-glow: rgba(124, 58, 237, 0.12);
+      --violet: #6D28D9;
+      --violet-glow: rgba(109, 40, 217, 0.12);
     }
 
     [data-theme="dark"] {
@@ -47,9 +49,9 @@
       --bg-card: #1a1a26;
       --text: #f0f0f5;
       --muted: #8888a0;
-      --accent: #f97066;
-      --accent-gradient: linear-gradient(135deg, #fbb1a8 0%, #f97066 50%, #e85d52 100%);
-      --accent-hover: #fbb1a8;
+      --accent: #7C3AED;
+      --accent-gradient: linear-gradient(135deg, #A78BFA 0%, #7C3AED 50%, #6D28D9 100%);
+      --accent-hover: #A78BFA;
       --stroke: rgba(255, 255, 255, 0.08);
       --card-bg: #1a1a26;
       --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
@@ -124,7 +126,7 @@
       text-transform: uppercase;
     }
 
-    .brand img { width: 32px; height: 32px; border-radius: 10px; }
+    .brand img { width: 36px; height: 36px; }
 
     .nav-links {
       display: none;
@@ -1063,7 +1065,7 @@
   <nav>
     <div class="container nav-inner">
       <a href="#inicio" class="brand">
-        <img id="brandLogo" src="favicon.svg" alt="Ponlonline" />
+        <img id="brandLogo" src="images/logo-p.png" alt="Ponlonline" />
         <span id="brandName">ponlonline</span>
       </a>
       <div id="navLinks" class="nav-links"></div>
@@ -1094,7 +1096,7 @@
                 <rect x="40" y="60" width="300" height="220" rx="16" fill="var(--card-bg)" stroke="var(--stroke)" stroke-width="1.5"/>
                 <!-- Browser top bar -->
                 <rect x="40" y="60" width="300" height="36" rx="16" fill="var(--text)" opacity="0.06"/>
-                <circle cx="62" cy="78" r="5" fill="#f97066" opacity="0.8"/>
+                <circle cx="62" cy="78" r="5" fill="#6D28D9" opacity="0.8"/>
                 <circle cx="80" cy="78" r="5" fill="#fbbf24" opacity="0.6"/>
                 <circle cx="98" cy="78" r="5" fill="#34d399" opacity="0.6"/>
                 <!-- URL bar -->
