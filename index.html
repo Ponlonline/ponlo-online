@@ -760,9 +760,20 @@
     }
 
     /* PRICING */
-    .pricing-card {
-      max-width: 480px;
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      max-width: 900px;
       margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .pricing-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .pricing-card {
+      max-width: 100%;
       background: var(--card-bg);
       border: 2px solid var(--text);
       border-radius: 24px;
@@ -850,18 +861,18 @@
       border-bottom: none;
     }
 
-    .pricing-note {
-      font-size: 0.8rem;
-      color: var(--muted);
-      line-height: 1.4;
-      margin: 12px 0 20px;
-      padding: 14px 16px;
-      background: var(--badge-bg);
-      border-radius: 12px;
+    .pricing-card.enterprise {
+      border-color: var(--accent);
     }
 
-    .pricing-note strong {
-      color: var(--text);
+    .pricing-card.enterprise .pricing-badge {
+      background: var(--text);
+    }
+
+    .enterprise-desc {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 20px;
     }
 
     /* PROCESS */
@@ -1266,7 +1277,7 @@
           <h2 id="pricingTitle">Un solo precio. Todo incluido.</h2>
           <p id="pricingDesc">Sin planes confusos. Si necesitas algo extra, lo conversamos.</p>
         </div>
-        <div id="pricingCard" class="reveal"></div>
+        <div id="pricingCard" class="pricing-grid reveal"></div>
       </div>
     </section>
 
@@ -1493,15 +1504,23 @@
       document.getElementById("pricingTitle").textContent = safe(pr.title, "Precio");
       document.getElementById("pricingDesc").textContent = safe(pr.description, "");
       const featuresHtml = (pr.features || []).map(f => `<li>${safe(f)}</li>`).join("");
+      const ent = pr.enterprise || {};
+      const entFeaturesHtml = (ent.features || []).map(f => `<li>${safe(f)}</li>`).join("");
       document.getElementById("pricingCard").innerHTML = `
         <div class="pricing-card">
-          <span class="pricing-badge">Plan unico</span>
+          <span class="pricing-badge">Plan base</span>
           <h3>Tu Web Profesional</h3>
           <div class="pricing-price"><span>USD</span> ${safe(pr.price, "150")}</div>
-          <p class="pricing-sub">precio base</p>
+          <p class="pricing-sub">todo incluido</p>
           <ul class="pricing-features">${featuresHtml}</ul>
-          <p class="pricing-note">¿Quieres manejar tu negocio en un solo sistema? Tienda, inventario, facturas y más. <strong>Escríbenos y te cotizamos.</strong></p>
           <a href="${safe(config.hero?.primaryCta?.url, "#")}" class="btn btn-accent" style="width:100%;" target="_blank" rel="noopener">Quiero mi web →</a>
+        </div>
+        <div class="pricing-card enterprise">
+          <span class="pricing-badge">${safe(ent.title, "A tu medida")}</span>
+          <h3>${safe(ent.description, "Para negocios que necesitan más")}</h3>
+          <p class="enterprise-desc">Cotización personalizada</p>
+          <ul class="pricing-features">${entFeaturesHtml}</ul>
+          <a href="${safe(config.hero?.primaryCta?.url, "#")}" class="btn btn-accent" style="width:100%;background:var(--cta-bg);color:var(--cta-text);" target="_blank" rel="noopener">Escríbenos →</a>
         </div>
       `;
 

@@ -98,22 +98,35 @@ window.PONLO_DEFAULT_CONFIG = {
     }
   ],
   pricing: {
-    title: "Un solo precio. Todo incluido.",
-    description: "Sin planes confusos. Si necesitas algo extra, lo conversamos.",
+    title: "Elige tu plan",
+    description: "Desde una web profesional hasta un sistema completo para tu negocio.",
     price: "150",
     features: [
-      "Página web profesional personalizada",
-      "Panel para editar sin código",
-      "Dominio propio (.com, .net, etc.)",
-      "Preparada para aparecer en Google",
-      "Estadísticas de visitas incluidas",
-      "WhatsApp integrado",
-      "Google Maps si tienes tienda física",
+      "Tu negocio con presencia profesional en internet",
+      "Tú mismo cambias textos y fotos cuando quieras",
+      "Tu propia dirección web (.com, .net, etc.)",
+      "Te encuentran desde Google, tu bio de IG o cualquier enlace",
+      "Sabes cuánta gente visita tu página",
+      "Tus clientes te escriben directo a tu WhatsApp",
+      "Pueden ver tu dirección exacta desde tu página",
       "Se ve perfecta en celular y computadora",
-      "Tu web siempre online, sin pagar extra",
-      "Entrega en 72 horas",
-      "Soporte por WhatsApp"
-    ]
+      "Siempre online, sin costos extra",
+      "Lista en 72 horas",
+      "Te ayudamos por WhatsApp cuando lo necesites"
+    ],
+    enterprise: {
+      title: "A tu medida",
+      description: "Para negocios que necesitan más",
+      features: [
+        "Todo lo del plan base",
+        "Cobra online directo desde tu web",
+        "Gestión de inventario y productos",
+        "Facturación y reportes",
+        "Panel administrativo avanzado",
+        "Construimos el sistema que tu negocio necesita, adaptado 100% a cómo trabajas",
+        "Soporte prioritario"
+      ]
+    }
   },
   process: [
     {
