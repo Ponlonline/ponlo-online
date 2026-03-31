@@ -7,8 +7,8 @@
   <meta name="description" content="Ponlonline crea páginas web profesionales para emprendedores. Tu negocio online en 72 horas." />
   <meta property="og:title" content="Ponlonline | Webs profesionales para emprendedores" />
   <meta property="og:description" content="Tu negocio merece su propia web profesional. Creamos tu página en 72 horas por USD 150." />
-  <meta property="og:image" content="https://ponlonline-v2.netlify.app/images/og-preview.png" />
-  <meta property="og:url" content="https://ponlonline-v2.netlify.app" />
+  <meta property="og:image" content="https://ponlonline.netlify.app/images/og-preview.png" />
+  <meta property="og:url" content="https://ponlonline.netlify.app" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png" />
@@ -33,11 +33,11 @@
       --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
       --card-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.08);
       --nav-bg: rgba(232, 228, 238, 0.9);
-      --cta-bg: #0a0a0a;
+      --cta-bg: #1a1a2e;
       --cta-text: #ffffff;
       --badge-bg: #f0ecf5;
       --badge-text: #5b4a8a;
-      --footer-bg: #0a0a0a;
+      --footer-bg: #1a1a2e;
       --footer-text: #a0a0b0;
       --violet: #6D28D9;
       --violet-glow: rgba(109, 40, 217, 0.12);
@@ -61,7 +61,7 @@
       --cta-text: #0e0e14;
       --badge-bg: rgba(109, 40, 217, 0.15);
       --badge-text: #a78bfa;
-      --footer-bg: #0a0a0f;
+      --footer-bg: #14142a;
       --footer-text: #6b6b80;
       --violet: #a78bfa;
       --violet-glow: rgba(167, 139, 250, 0.15);
@@ -534,8 +534,8 @@
     .feature-card {
       background: var(--card-bg);
       border: 1px solid var(--stroke);
-      border-radius: 20px;
-      padding: 28px 24px;
+      border-radius: 16px;
+      padding: 20px 20px;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -545,14 +545,14 @@
     }
 
     .feature-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
       background: var(--badge-bg);
       color: var(--badge-text);
       display: grid;
       place-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       font-size: 1.2rem;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -564,15 +564,15 @@
     }
 
     .feature-card h3 {
-      font-size: 1.05rem;
+      font-size: 0.95rem;
       font-weight: 800;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       letter-spacing: -0.02em;
     }
 
     .feature-card p {
       color: var(--muted);
-      font-size: 0.92rem;
+      font-size: 0.85rem;
       line-height: 1.5;
     }
 
@@ -588,6 +588,7 @@
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
+      touch-action: pan-x;
       padding-bottom: 8px;
       scrollbar-width: none;
     }
@@ -612,10 +613,12 @@
     }
 
     .project-img {
+      display: block;
       position: relative;
       overflow: hidden;
       aspect-ratio: 16 / 10;
       background: var(--bg-soft);
+      cursor: pointer;
     }
 
     .project-img img {
@@ -715,8 +718,12 @@
     }
 
     .slider-arrows {
-      display: flex;
+      display: none;
       gap: 8px;
+    }
+
+    @media (min-width: 768px) {
+      .slider-arrows { display: flex; }
     }
 
     .slider-arrow {
@@ -854,7 +861,6 @@
     }
 
     .process-step:hover {
-      transform: translateY(-3px);
       box-shadow: var(--card-shadow-hover);
     }
 
@@ -863,23 +869,17 @@
     }
 
     .step-number {
-      width: 52px;
-      height: 52px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
-      background: var(--text);
-      color: var(--card-bg);
+      background: var(--accent);
+      color: #ffffff;
       font-weight: 900;
       font-size: 1.1rem;
       display: grid;
       place-items: center;
       margin: 0 auto 14px;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .process-step:hover .step-number {
-      transform: scale(1.1);
-      background: var(--accent);
-      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(109, 40, 217, 0.25);
     }
 
     .process-step h3 {
@@ -898,7 +898,7 @@
 
     /* CTA */
     .cta-section {
-      background: var(--text);
+      background: #1a1a2e;
       padding: 80px 0;
       text-align: center;
       border-radius: 24px;
@@ -1276,7 +1276,7 @@
   <footer>
     <div class="container">
       <span id="footerText">ponlonline · 2026 · Webs profesionales para emprendedores</span>
-      <div class="made-with">Hecho con <a href="https://ponlonline-v2.netlify.app">ponlonline</a></div>
+      <div class="made-with">Hecho con <a href="https://ponlonline.netlify.app">ponlonline</a></div>
     </div>
   </footer>
 
@@ -1399,9 +1399,9 @@
         card.className = "project-card";
         const tagsHtml = (p.tags || []).map(t => `<span class="tag">${safe(t)}</span>`).join("");
         card.innerHTML = `
-          <div class="project-img">
+          <a href="${safe(p.linkUrl, "#")}" target="_blank" rel="noopener" class="project-img">
             <img src="${safe(p.imageUrl)}" alt="${safe(p.title)}" loading="lazy" onload="this.classList.add('loaded')" />
-          </div>
+          </a>
           <div class="project-info">
             <h3>${safe(p.title)}</h3>
             <p>${safe(p.description)}</p>
@@ -1410,45 +1410,61 @@
           </div>
         `;
         slider.appendChild(card);
-
-        const dot = document.createElement("button");
-        dot.className = "slider-dot" + (i === 0 ? " active" : "");
-        dot.setAttribute("aria-label", `Proyecto ${i + 1}`);
-        dot.addEventListener("click", () => {
-          card.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
-        });
-        dotsContainer.appendChild(dot);
       });
 
-      // Slider navigation
+      // Slider pagination (page-based dots)
       const prevBtn = document.getElementById("sliderPrev");
       const nextBtn = document.getElementById("sliderNext");
-      const cardWidth = () => slider.querySelector(".project-card")?.offsetWidth + 16 || 400;
+
+      const getPageInfo = () => {
+        const sw = slider.scrollWidth;
+        const cw = slider.clientWidth;
+        if (!cw || cw >= sw) return { total: 1, current: 0 };
+        const maxScroll = sw - cw;
+        const total = Math.min(Math.max(1, Math.ceil(maxScroll / cw) + 1), projects.length);
+        const current = Math.round((slider.scrollLeft / maxScroll) * (total - 1));
+        return { total, current: Math.min(current, total - 1) };
+      };
+
+      const buildDots = () => {
+        const { total, current } = getPageInfo();
+        const existing = dotsContainer.querySelectorAll(".slider-dot").length;
+        if (existing !== total) {
+          dotsContainer.innerHTML = "";
+          for (let i = 0; i < total; i++) {
+            const dot = document.createElement("button");
+            dot.className = "slider-dot" + (i === current ? " active" : "");
+            dot.setAttribute("aria-label", `Página ${i + 1}`);
+            dot.addEventListener("click", () => {
+              const maxScroll = slider.scrollWidth - slider.clientWidth;
+              const target = total > 1 ? (i / (total - 1)) * maxScroll : 0;
+              slider.scrollTo({ left: target, behavior: "smooth" });
+            });
+            dotsContainer.appendChild(dot);
+          }
+        } else {
+          dotsContainer.querySelectorAll(".slider-dot").forEach((d, i) => {
+            d.classList.toggle("active", i === current);
+          });
+        }
+        prevBtn.disabled = slider.scrollLeft <= 10;
+        nextBtn.disabled = slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10;
+      };
 
       prevBtn.addEventListener("click", () => {
-        slider.scrollBy({ left: -cardWidth(), behavior: "smooth" });
+        slider.scrollBy({ left: -slider.clientWidth * 0.8, behavior: "smooth" });
       });
       nextBtn.addEventListener("click", () => {
-        slider.scrollBy({ left: cardWidth(), behavior: "smooth" });
+        slider.scrollBy({ left: slider.clientWidth * 0.8, behavior: "smooth" });
       });
 
-      // Update dots and arrow states on scroll
+      let scrollTimer;
       slider.addEventListener("scroll", () => {
-        const cards = slider.querySelectorAll(".project-card");
-        const dots = dotsContainer.querySelectorAll(".slider-dot");
-        let activeIndex = 0;
-        const scrollLeft = slider.scrollLeft;
-        cards.forEach((card, i) => {
-          if (card.offsetLeft - slider.offsetLeft <= scrollLeft + 20) {
-            activeIndex = i;
-          }
-        });
-        dots.forEach((d, i) => d.classList.toggle("active", i === activeIndex));
-        prevBtn.disabled = scrollLeft <= 10;
-        nextBtn.disabled = scrollLeft + slider.clientWidth >= slider.scrollWidth - 10;
+        cancelAnimationFrame(scrollTimer);
+        scrollTimer = requestAnimationFrame(buildDots);
       });
-      // Init arrow states
-      prevBtn.disabled = true;
+      buildDots();
+      window.addEventListener("resize", () => { dotsContainer.innerHTML = ""; buildDots(); });
 
       // Pricing
       const pr = config.pricing || {};

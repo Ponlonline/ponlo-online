@@ -4,7 +4,7 @@ window.PONLO_DEFAULT_CONFIG = {
     logoUrl: "images/logo-p.png",
     nav: [
       { label: "Inicio", href: "#inicio" },
-      { label: "Features", href: "#features" },
+      { label: "Incluye", href: "#features" },
       { label: "Proyectos", href: "#proyectos" },
       { label: "Precio", href: "#precio" },
       { label: "Contacto", href: "#contacto" }
@@ -16,7 +16,7 @@ window.PONLO_DEFAULT_CONFIG = {
   },
   hero: {
     title: "Tu negocio con presencia profesional en internet.",
-    description: "Creamos tu página web en 72 horas. Con panel admin, SEO, dominio propio y WhatsApp integrado. Todo por un solo precio.",
+    description: "Creamos tu página web en 72 horas. Con panel para editar, dominio propio y WhatsApp integrado. Todo por un solo precio.",
     primaryCta: {
       label: "Quiero mi web",
       url: "https://wa.me/584121234567?text=Hola,%20quiero%20mi%20web%20con%20Ponlonline"
@@ -34,18 +34,18 @@ window.PONLO_DEFAULT_CONFIG = {
     },
     {
       icon: "edit",
-      title: "Panel admin",
-      description: "Edita textos, fotos y productos tú mismo. Sin tocar código."
+      title: "Edítala tú mismo",
+      description: "Cambia textos, fotos y productos cuando quieras. Sin tocar código."
     },
     {
       icon: "search",
-      title: "SEO optimizado",
-      description: "Meta tags, Open Graph y sitemap para que Google te encuentre."
+      title: "Te encuentran en Google",
+      description: "Configuramos todo para que tu negocio aparezca cuando la gente busque en Google."
     },
     {
       icon: "bar-chart",
-      title: "Google Analytics",
-      description: "Mide cuántas personas visitan tu web y de dónde vienen."
+      title: "Sabes quién te visita",
+      description: "Ves cuántas personas entran a tu web, de dónde vienen y qué miran."
     },
     {
       icon: "message-circle",
@@ -59,8 +59,8 @@ window.PONLO_DEFAULT_CONFIG = {
     },
     {
       icon: "smartphone",
-      title: "Diseño responsive",
-      description: "Tu web se ve perfecta en celular, tablet y computadora. Se adapta automáticamente a cualquier pantalla."
+      title: "Perfecta en cualquier pantalla",
+      description: "Tu web se ve perfecta en celular, tablet y computadora. Se adapta automáticamente."
     }
   ],
   projects: [
@@ -102,15 +102,15 @@ window.PONLO_DEFAULT_CONFIG = {
     description: "Sin planes confusos. Si necesitas algo extra, lo conversamos.",
     price: "150",
     features: [
-      "Landing page profesional personalizada",
-      "Panel admin para editar sin código",
+      "Página web profesional personalizada",
+      "Panel para editar sin código",
       "Dominio propio (.com, .net, etc.)",
-      "SEO optimizado (meta tags, Open Graph, sitemap)",
-      "Google Analytics configurado",
+      "Preparada para aparecer en Google",
+      "Estadísticas de visitas incluidas",
       "WhatsApp integrado",
       "Google Maps si tienes tienda física",
-      "Diseño responsive (perfecto en celular)",
-      "Hosting incluido",
+      "Se ve perfecta en celular y computadora",
+      "Tu web siempre online, sin pagar extra",
       "Entrega en 72 horas",
       "Soporte por WhatsApp"
     ]
@@ -129,7 +129,7 @@ window.PONLO_DEFAULT_CONFIG = {
     {
       step: "3",
       title: "Publicamos",
-      description: "Activamos dominio, analytics, WhatsApp y tu panel admin."
+      description: "Activamos tu dominio, WhatsApp y todo lo que necesitas."
     },
     {
       step: "4",
