@@ -206,20 +206,30 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 12px 24px;
+      padding: 10px 16px;
       border-radius: 999px;
-      font-size: 0.85rem;
+      font-size: 0.72rem;
       font-weight: 700;
       border: none;
       cursor: pointer;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       text-transform: uppercase;
       letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    @media (min-width: 768px) {
+      .btn { padding: 12px 24px; font-size: 0.85rem; }
     }
 
     .btn-primary {
       background: var(--cta-bg);
       color: var(--cta-text);
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .btn-primary { display: inline-flex; }
     }
 
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); }
@@ -548,8 +558,8 @@
       width: 40px;
       height: 40px;
       border-radius: 12px;
-      background: var(--badge-bg);
-      color: var(--badge-text);
+      background: var(--accent);
+      color: #ffffff;
       display: grid;
       place-items: center;
       margin-bottom: 12px;
@@ -559,8 +569,6 @@
 
     .feature-card:hover .feature-icon {
       transform: scale(1.1) rotate(-6deg);
-      background: var(--accent);
-      color: #ffffff;
     }
 
     .feature-card h3 {
@@ -758,7 +766,7 @@
       background: var(--card-bg);
       border: 2px solid var(--text);
       border-radius: 24px;
-      padding: 44px 36px;
+      padding: 32px 28px;
       text-align: center;
       transition: all 0.3s ease;
     }
@@ -778,21 +786,21 @@
       letter-spacing: 0.08em;
       background: var(--accent-gradient);
       color: #fff;
-      margin-bottom: 20px;
+      margin-bottom: 14px;
     }
 
     .pricing-card h3 {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       font-weight: 800;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
       letter-spacing: -0.02em;
     }
 
     .pricing-price {
-      font-size: 3.8rem;
+      font-size: 3rem;
       font-weight: 900;
       line-height: 1;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
       letter-spacing: -0.04em;
     }
 
@@ -805,20 +813,20 @@
 
     .pricing-sub {
       color: var(--muted);
-      font-size: 0.9rem;
-      margin-bottom: 28px;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
     }
 
     .pricing-features {
       list-style: none;
       text-align: left;
-      margin-bottom: 32px;
+      margin-bottom: 16px;
     }
 
     .pricing-features li {
-      padding: 10px 0;
+      padding: 7px 0;
       border-bottom: 1px solid var(--stroke);
-      font-size: 0.92rem;
+      font-size: 0.85rem;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -826,8 +834,8 @@
 
     .pricing-features li::before {
       content: "";
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
       background: var(--accent);
       flex-shrink: 0;
@@ -840,6 +848,20 @@
 
     .pricing-features li:last-child {
       border-bottom: none;
+    }
+
+    .pricing-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.4;
+      margin: 12px 0 20px;
+      padding: 14px 16px;
+      background: var(--badge-bg);
+      border-radius: 12px;
+    }
+
+    .pricing-note strong {
+      color: var(--text);
     }
 
     /* PROCESS */
@@ -1478,6 +1500,7 @@
           <div class="pricing-price"><span>USD</span> ${safe(pr.price, "150")}</div>
           <p class="pricing-sub">precio base</p>
           <ul class="pricing-features">${featuresHtml}</ul>
+          <p class="pricing-note">¿Quieres manejar tu negocio en un solo sistema? Tienda, inventario, facturas y más. <strong>Escríbenos y te cotizamos.</strong></p>
           <a href="${safe(config.hero?.primaryCta?.url, "#")}" class="btn btn-accent" style="width:100%;" target="_blank" rel="noopener">Quiero mi web →</a>
         </div>
       `;
