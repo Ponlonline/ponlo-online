@@ -95,6 +95,14 @@ window.PONLO_DEFAULT_CONFIG = {
       imageUrl: "images/portfolio-rafaga.png",
       tags: ["Moda", "WhatsApp"],
       linkUrl: "https://rafagavzla.netlify.app"
+    },
+    {
+      id: "casa-musiua",
+      title: "Casa Musiúa",
+      description: "Lámparas decorativas impresas en 3D con carrito de compras.",
+      imageUrl: "images/portfolio-casa-musiua.png",
+      tags: ["Decoración", "E-commerce"],
+      linkUrl: "https://casa-musiua.netlify.app"
     }
   ],
   pricing: {
