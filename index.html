@@ -1554,6 +1554,12 @@
       document.getElementById("ctaDesc").textContent = safe(config.cta?.description);
       setLink(document.getElementById("ctaPrimary"), config.cta?.primaryCta, "WhatsApp");
       setLink(document.getElementById("ctaSecondary"), config.cta?.secondaryCta, "Correo");
+      // Desktop: open Gmail in browser. Mobile: mailto opens Gmail app.
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      const emailBtn = document.getElementById("ctaSecondary");
+      if (!isMobile && config.cta?.secondaryCta?.urlDesktop) {
+        emailBtn.href = config.cta.secondaryCta.urlDesktop;
+      }
 
       // Payment methods
       const pmDiv = document.getElementById("paymentMethods");

@@ -167,7 +167,8 @@ window.PONLO_DEFAULT_CONFIG = {
     },
     secondaryCta: {
       label: "Correo",
-      url: "https://mail.google.com/mail/?view=cm&to=ponlonline.web@gmail.com&su=Quiero%20mi%20web%20con%20ponlonline"
+      url: "mailto:ponlonline.web@gmail.com",
+      urlDesktop: "https://mail.google.com/mail/?view=cm&to=ponlonline.web@gmail.com&su=Quiero%20mi%20web%20con%20ponlonline"
     }
   },
   paymentMethods: [
