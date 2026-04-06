@@ -16,7 +16,7 @@ window.PONLO_DEFAULT_CONFIG = {
   },
   hero: {
     title: "Tu negocio con presencia profesional en internet.",
-    description: "Creamos tu página web en 72 horas. Con panel para editar, dominio propio y WhatsApp integrado. Todo por un solo precio.",
+    description: "Creamos tu página web en 5 días. Con panel para editar, dominio propio y WhatsApp integrado. Todo por un solo precio.",
     primaryCta: {
       label: "Quiero mi web",
       url: "https://wa.me/584121234567?text=Hola,%20quiero%20mi%20web%20con%20Ponlonline"
@@ -119,7 +119,7 @@ window.PONLO_DEFAULT_CONFIG = {
       "Pueden ver tu dirección exacta desde tu página",
       "Se ve perfecta en celular y computadora",
       "Siempre online, sin costos extra",
-      "Lista en 72 horas",
+      "Lista en 5 días",
       "Te ayudamos por WhatsApp cuando lo necesites"
     ],
     enterprise: {
@@ -145,7 +145,7 @@ window.PONLO_DEFAULT_CONFIG = {
     {
       step: "2",
       title: "Diseñamos",
-      description: "En 72 horas tienes tu sitio listo para revisar."
+      description: "En 5 días tienes tu sitio listo para revisar."
     },
     {
       step: "3",
@@ -160,7 +160,7 @@ window.PONLO_DEFAULT_CONFIG = {
   ],
   cta: {
     title: "¿Listo para tener tu web?",
-    description: "Escríbenos por WhatsApp y en 72 horas tienes tu sitio listo.",
+    description: "Escríbenos por WhatsApp y en 5 días tienes tu sitio listo.",
     primaryCta: {
       label: "WhatsApp",
       url: "https://wa.me/584121234567?text=Hola,%20quiero%20mi%20web%20con%20Ponlonline"

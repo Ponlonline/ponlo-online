@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ponlonline | Webs profesionales para emprendedores</title>
-  <meta name="description" content="Ponlonline crea páginas web profesionales para emprendedores. Tu negocio online en 72 horas." />
+  <meta name="description" content="Ponlonline crea páginas web profesionales para emprendedores. Tu negocio online en 5 días." />
   <meta property="og:title" content="Ponlonline | Webs profesionales para emprendedores" />
-  <meta property="og:description" content="Tu negocio merece su propia web profesional. Creamos tu página en 72 horas por USD 150." />
+  <meta property="og:description" content="Tu negocio merece su propia web profesional. Creamos tu página en 5 días por USD 150." />
   <meta property="og:image" content="https://ponlonline.netlify.app/images/og-preview.png" />
   <meta property="og:url" content="https://ponlonline.netlify.app" />
   <meta property="og:type" content="website" />
@@ -1236,8 +1236,8 @@
         <div class="bento-row stagger">
           <div class="bento-card bento-testimonial">
             <span class="quote-mark">"</span>
-            <p class="quote-text" id="heroDesc">Creamos tu web en 72 horas. Con panel admin, SEO, dominio propio y WhatsApp integrado.</p>
-            <div class="quote-brand">72h delivery</div>
+            <p class="quote-text" id="heroDesc">Creamos tu web en 5 días. Con panel admin, SEO, dominio propio y WhatsApp integrado.</p>
+            <div class="quote-brand">5 días delivery</div>
           </div>
           <div class="bento-card bento-team">
             <h3>El equipo con la experiencia que tu negocio necesita.</h3>
@@ -1322,7 +1322,7 @@
       <div class="cta-section">
         <div class="container">
           <h2 id="ctaTitle" class="reveal">Listo para tener tu web?</h2>
-          <p id="ctaDesc" class="reveal">Escribenos y en 72 horas tienes tu sitio.</p>
+          <p id="ctaDesc" class="reveal">Escríbenos y en 5 días tienes tu sitio.</p>
           <div class="cta-buttons reveal">
             <a id="ctaPrimary" href="#" class="btn btn-whatsapp">WhatsApp</a>
             <a id="ctaSecondary" href="#" class="btn btn-dark">Correo</a>
@@ -1339,7 +1339,7 @@
 
   <footer>
     <div class="container">
-      <span id="footerText">ponlonline · 2026 · Webs profesionales para emprendedores</span>
+      <span id="footerText" style="display:flex;align-items:center;justify-content:center;gap:6px;"><a href="https://ponlonline.netlify.app" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;"><img src="images/logo-p.png" alt="ponlonline" style="height:18px;width:auto;"></a> · 2026 · Webs profesionales para emprendedores</span>
     </div>
   </footer>
 
@@ -1591,7 +1591,7 @@
       });
 
       // Footer
-      document.getElementById("footerText").textContent = `ponlonline · ${new Date().getFullYear()} · Webs profesionales para emprendedores`;
+      document.getElementById("footerText").innerHTML = `<a href="https://ponlonline.netlify.app" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;"><img src="images/logo-p.png" alt="ponlonline" style="height:18px;width:auto;"></a> · ${new Date().getFullYear()} · Webs profesionales para emprendedores`;
     }
 
     loadConfig().then(config => {
