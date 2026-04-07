@@ -173,7 +173,6 @@ window.PONLO_DEFAULT_CONFIG = {
   },
   paymentMethods: [
     { name: "Pago Móvil", icon: "pago-movil" },
-    { name: "Binance (USDT)", icon: "binance" },
-    { name: "Zelle", icon: "zelle" }
+    { name: "Binance (USDT)", icon: "binance" }
   ]
 };
