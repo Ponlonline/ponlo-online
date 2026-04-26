@@ -1805,9 +1805,8 @@
         window.clearTimeout(autoplay);
         window.clearTimeout(resumeTimer);
         resumeTimer = window.setTimeout(() => {
-          const elapsed = performance.now() - slideStartedAt;
-          const remaining = Math.max(0, autoplayDelay - elapsed);
-          scheduleAutoplay(remaining);
+          slideStartedAt = performance.now();
+          scheduleAutoplay(autoplayDelay);
         }, interactionResumeDelay);
       }
 
