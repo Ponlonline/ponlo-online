@@ -70,6 +70,7 @@ window.PONLO_DEFAULT_CONFIG = {
       title: "El Fogón Criollo",
       description: "Restaurante con menú interactivo y reservas por WhatsApp.",
       imageUrl: "images/portfolio-fogon-criollo.png",
+      mobileImageUrl: "images/portfolio-el-fogon-criollo-mobile.png",
       tags: ["Restaurante", "Menú digital"],
       linkUrl: "https://el-fogon-criollo.netlify.app"
     },
@@ -78,6 +79,7 @@ window.PONLO_DEFAULT_CONFIG = {
       title: "SparkleHats",
       description: "Tienda de gorras premium con catálogo visual.",
       imageUrl: "images/portfolio-sparklehats.png",
+      mobileImageUrl: "images/portfolio-sparklehats-mobile.png",
       tags: ["E-commerce", "Moda"],
       linkUrl: "https://sparklehats-shop.netlify.app"
     },
@@ -86,6 +88,7 @@ window.PONLO_DEFAULT_CONFIG = {
       title: "TechZone",
       description: "Componentes de PC con catálogo por categorías.",
       imageUrl: "images/portfolio-techzone.png",
+      mobileImageUrl: "images/portfolio-techzone-mobile.png",
       tags: ["Tecnología", "Catálogo"],
       linkUrl: "https://techzone-ponlonline.netlify.app"
     },
@@ -94,6 +97,7 @@ window.PONLO_DEFAULT_CONFIG = {
       title: "Ráfaga",
       description: "Moda femenina con pedidos directos por WhatsApp.",
       imageUrl: "images/portfolio-rafaga.png",
+      mobileImageUrl: "images/portfolio-rafaga-mobile.png",
       tags: ["Moda", "WhatsApp"],
       linkUrl: "https://rafagavzla.netlify.app"
     },
@@ -102,6 +106,7 @@ window.PONLO_DEFAULT_CONFIG = {
       title: "Casa Musiúa",
       description: "Lámparas decorativas impresas en 3D con carrito de compras.",
       imageUrl: "images/portfolio-casa-musiua.png",
+      mobileImageUrl: "images/portfolio-casa-musiua-mobile.png",
       tags: ["Decoración", "E-commerce"],
       linkUrl: "https://casa-musiua.netlify.app"
     }
