@@ -1654,6 +1654,9 @@
       let resumeTimer = null;
       let jumpTimer = null;
       let isJumping = false;
+      let slideStartedAt = performance.now();
+      const autoplayDelay = 3400;
+      const interactionResumeDelay = 500;
       const isMobile = () => window.matchMedia("(max-width: 767px)").matches;
 
       function preloadMobileImages() {
@@ -1731,7 +1734,11 @@
       function setActive(index, resetProgress = false) {
         const nextCurrent = Math.max(0, Math.min(index, cards.length - 1));
         if (!resetProgress && nextCurrent === current) return;
+        const changed = nextCurrent !== current;
         current = nextCurrent;
+        if (changed || resetProgress) {
+          slideStartedAt = performance.now();
+        }
         progressItems.forEach((item, itemIndex) => {
           const active = itemIndex === current;
           if (active && resetProgress) {
@@ -1785,18 +1792,23 @@
         setActive(realIndex);
       }
 
-      function startAutoplay() {
-        window.clearInterval(autoplay);
+      function scheduleAutoplay(delay = autoplayDelay) {
+        window.clearTimeout(autoplay);
         if (!isMobile() || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-        autoplay = window.setInterval(() => {
+        autoplay = window.setTimeout(() => {
           moveProject(1);
-        }, 3400);
+          scheduleAutoplay(autoplayDelay);
+        }, delay);
       }
 
       function pauseAutoplay() {
-        window.clearInterval(autoplay);
+        window.clearTimeout(autoplay);
         window.clearTimeout(resumeTimer);
-        resumeTimer = window.setTimeout(startAutoplay, 9000);
+        resumeTimer = window.setTimeout(() => {
+          const elapsed = performance.now() - slideStartedAt;
+          const remaining = Math.max(0, autoplayDelay - elapsed);
+          scheduleAutoplay(remaining);
+        }, interactionResumeDelay);
       }
 
       prev.addEventListener("click", () => {
@@ -1818,14 +1830,14 @@
       window.addEventListener("resize", () => {
         setupLoopCards();
         detectActive();
-        startAutoplay();
+        scheduleAutoplay();
       });
 
       setupLoopCards();
       preloadMobileImages();
       setActive(0, true);
       if (isMobile()) scrollToTrackIndex(trackIndexForReal(0), "auto");
-      startAutoplay();
+      scheduleAutoplay();
     }
 
     async function loadConfig() {
