@@ -15,7 +15,8 @@ window.PONLO_DEFAULT_CONFIG = {
     }
   },
   hero: {
-    title: "Tu negocio con presencia profesional en internet.",
+    title: "Tu negocio merece una web",
+    typewriterWords: ["moderna", "editable", "profesional", "visible"],
     description: "Creamos tu página web en 5 días. Con panel para editar, dominio propio y WhatsApp integrado. Todo por un solo precio.",
     primaryCta: {
       label: "Quiero mi web",

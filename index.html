@@ -296,10 +296,33 @@
       font-weight: 900;
       line-height: 0.95;
       letter-spacing: -0.04em;
-      max-width: 12ch;
+      max-width: 13ch;
       margin-bottom: 32px;
       position: relative;
       z-index: 2;
+    }
+
+    .typewriter {
+      display: inline-block;
+      min-width: 8ch;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .typewriter::after {
+      content: "";
+      display: inline-block;
+      width: 0.08em;
+      height: 0.78em;
+      margin-left: 0.06em;
+      background: currentColor;
+      animation: caretBlink 850ms steps(1) infinite;
+      vertical-align: -0.04em;
+    }
+
+    @keyframes caretBlink {
+      0%, 45% { opacity: 1; }
+      46%, 100% { opacity: 0; }
     }
 
     .hero-actions {
@@ -584,179 +607,162 @@
       line-height: 1.5;
     }
 
-    /* PROJECTS SLIDER */
-    .slider-wrapper {
-      position: relative;
+    /* PROJECTS SHOWCASE */
+    .project-showcase {
+      display: grid;
+      gap: 18px;
     }
 
-    .projects-slider {
+    .project-row {
       display: flex;
-      gap: 16px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      touch-action: pan-x;
-      padding-bottom: 8px;
-      scrollbar-width: none;
-    }
-
-    .projects-slider::-webkit-scrollbar {
-      display: none;
+      gap: 18px;
+      align-items: stretch;
     }
 
     .project-card {
-      flex: 0 0 85%;
-      max-width: 420px;
+      position: relative;
+      flex: 1 1 0;
+      min-height: 340px;
       border-radius: 20px;
       overflow: hidden;
       border: 1px solid var(--stroke);
-      background: var(--card-bg);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      scroll-snap-align: start;
+      background: var(--cta-bg);
+      color: var(--cta-text);
+      isolation: isolate;
+      transition: flex 420ms cubic-bezier(0.16, 1, 0.3, 1), transform 280ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 280ms ease, opacity 240ms ease;
     }
 
-    .project-card:hover {
+    .project-row:has(.project-card:hover) .project-card,
+    .project-row:has(.project-card:focus-visible) .project-card {
+      opacity: 0.84;
+    }
+
+    .project-row:has(.project-card:hover) .project-card:hover,
+    .project-row:has(.project-card:focus-visible) .project-card:focus-visible {
+      flex-grow: 1.7;
+      opacity: 1;
+    }
+
+    .project-card:hover,
+    .project-card:focus-visible {
+      z-index: 3;
+      transform: translateY(-8px);
       box-shadow: var(--card-shadow-hover);
     }
 
-    .project-img {
-      display: block;
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 16 / 10;
-      background: var(--bg-soft);
-      cursor: pointer;
+    .project-large {
+      min-height: 430px;
     }
 
-    .project-img img {
+    .project-small {
+      min-height: 330px;
+    }
+
+    .project-image {
+      display: block;
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: var(--bg-soft);
+    }
+
+    .project-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, var(--cta-bg) 0%, transparent 76%);
+      opacity: 0.86;
+      transition: opacity 260ms ease;
+    }
+
+    .project-card:hover .project-image::after,
+    .project-card:focus-visible .project-image::after {
+      opacity: 0.76;
+    }
+
+    .project-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
-      opacity: 0;
+      object-position: top center;
+      transition: transform 620ms cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
     }
 
-    .project-img img.loaded {
-      opacity: 1;
-    }
-
-    .project-card:hover .project-img img {
-      transform: scale(1.04);
+    .project-card:hover .project-image img,
+    .project-card:focus-visible .project-image img {
+      transform: scale(1.08);
     }
 
     .project-info {
-      padding: 24px;
+      position: absolute;
+      inset: auto 0 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      padding: 28px;
+      color: var(--cta-text);
+      transform: translateY(0);
+      transition: transform 280ms ease;
+    }
+
+    .project-large .project-info {
+      padding: 34px;
+    }
+
+    .project-info span {
+      color: currentColor;
+      opacity: 0.72;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .project-info h3 {
-      font-size: 1.1rem;
+      font-size: clamp(1.45rem, 3vw, 2.2rem);
       font-weight: 800;
-      margin-bottom: 4px;
+      line-height: 1;
+      margin: 10px 0 8px;
       letter-spacing: -0.02em;
     }
 
+    .project-large .project-info h3 {
+      font-size: clamp(2rem, 4.8vw, 3.2rem);
+    }
+
     .project-info p {
-      color: var(--muted);
+      max-width: 33ch;
+      color: currentColor;
+      opacity: 0.74;
       font-size: 0.9rem;
-      margin-bottom: 12px;
+      margin-bottom: 18px;
     }
 
-    .project-tags {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .tag {
-      padding: 5px 12px;
-      border-radius: 999px;
-      font-size: 0.74rem;
-      font-weight: 700;
-      background: var(--badge-bg);
-      color: var(--badge-text);
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-    }
-
-    .project-link {
+    .project-info strong {
       display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      color: var(--accent);
-      font-size: 0.88rem;
+      align-self: flex-start;
+      margin-top: auto;
+      padding: 9px 13px;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      color: var(--cta-text);
+      background: transparent;
+      font-size: 0.76rem;
       font-weight: 700;
-      margin-top: 12px;
-      transition: gap 0.2s;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 240ms ease, transform 240ms ease;
     }
 
-    .project-link:hover { gap: 8px; }
-
-    /* Slider arrows */
-    .slider-nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 24px;
-    }
-
-    .slider-dots {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .slider-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--text);
-      opacity: 0.15;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .slider-dot.active {
+    .project-card:hover .project-info strong,
+    .project-card:focus-visible .project-info strong {
       opacity: 1;
-      width: 24px;
-      border-radius: 4px;
-      background: var(--accent);
+      transform: translateY(0);
     }
 
-    .slider-arrows {
-      display: none;
-      gap: 8px;
-    }
-
-    @media (min-width: 768px) {
-      .slider-arrows { display: flex; }
-    }
-
-    .slider-arrow {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: 1.5px solid var(--stroke);
-      background: var(--card-bg);
-      color: var(--text);
-      cursor: pointer;
-      display: grid;
-      place-items: center;
-      transition: all 0.25s ease;
-    }
-
-    .slider-arrow:hover {
-      border-color: var(--text);
-      background: var(--text);
-      color: var(--card-bg);
-    }
-
-    .slider-arrow:disabled {
-      opacity: 0.3;
-      cursor: default;
-      pointer-events: none;
+    .project-card:hover .project-info,
+    .project-card:focus-visible .project-info {
+      transform: translateY(-4px);
     }
 
     /* PRICING */
@@ -1084,7 +1090,6 @@
       .hero-grid { grid-template-columns: 1fr; }
       .bento-row { grid-template-columns: repeat(2, 1fr); }
       .features-grid { gap: 16px; }
-      .project-card { flex: 0 0 46%; }
       .process-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
@@ -1105,7 +1110,36 @@
     @media (min-width: 1024px) {
       .hero-main { padding: 64px 56px; min-height: 520px; }
       .cta-section { margin: 0 32px 48px; padding: 100px 0; }
-      .project-card { flex: 0 0 38%; }
+    }
+
+    @media (max-width: 767px) {
+      .typewriter {
+        display: block;
+        min-height: 1em;
+      }
+
+      .project-row {
+        flex-direction: column;
+      }
+
+      .project-row:has(.project-card:hover) .project-card,
+      .project-row:has(.project-card:focus-visible) .project-card,
+      .project-row:has(.project-card:hover) .project-card:hover,
+      .project-row:has(.project-card:focus-visible) .project-card:focus-visible {
+        flex-grow: 1;
+        opacity: 1;
+      }
+
+      .project-card,
+      .project-large,
+      .project-small {
+        min-height: 340px;
+      }
+
+      .project-large .project-info,
+      .project-info {
+        padding: 24px;
+      }
     }
 
     @keyframes pricingGlow {
@@ -1222,7 +1256,7 @@
                 <circle cx="210" cy="45" r="3" fill="var(--text)" opacity="0.08"/>
               </svg>
             </div>
-            <h1 id="heroTitle">Tu negocio con presencia profesional</h1>
+            <h1 id="heroTitle">Tu negocio merece una web <span id="typewriter" class="typewriter">moderna</span></h1>
             <div class="hero-actions">
               <a id="heroPrimary" href="#" class="btn btn-accent">Quiero mi web</a>
               <a id="heroSecondary" href="#" class="btn-icon" title="Ver proyectos">
@@ -1281,20 +1315,7 @@
           <h2>Proyectos reales</h2>
           <p>Sitios web que hemos creado para negocios en Venezuela y Latinoamerica.</p>
         </div>
-        <div class="slider-wrapper reveal">
-          <div id="projectsSlider" class="projects-slider"></div>
-          <div class="slider-nav">
-            <div id="sliderDots" class="slider-dots"></div>
-            <div class="slider-arrows">
-              <button class="slider-arrow" id="sliderPrev" aria-label="Anterior">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-              </button>
-              <button class="slider-arrow" id="sliderNext" aria-label="Siguiente">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
-              </button>
-            </div>
-          </div>
-        </div>
+        <div id="projectsShowcase" class="project-showcase reveal"></div>
       </div>
     </section>
 
@@ -1392,6 +1413,66 @@
       }
     }
 
+    function renderHeroTitle(hero = {}) {
+      const title = document.getElementById("heroTitle");
+      if (!title) return;
+      const prefix = safe(hero.typewriterPrefix || hero.title, "Tu negocio merece una web");
+      const words = Array.isArray(hero.typewriterWords) && hero.typewriterWords.length
+        ? hero.typewriterWords.map(word => safe(word).trim()).filter(Boolean)
+        : ["moderna", "editable", "profesional", "visible"];
+      const firstWord = words[0] || "moderna";
+
+      title.textContent = "";
+      title.append(document.createTextNode(prefix + " "));
+
+      const dynamicWord = document.createElement("span");
+      dynamicWord.id = "typewriter";
+      dynamicWord.className = "typewriter";
+      dynamicWord.textContent = firstWord;
+      title.appendChild(dynamicWord);
+
+      startTypewriter(dynamicWord, words);
+    }
+
+    function startTypewriter(target, words) {
+      if (!target || !words.length) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        target.textContent = words[0];
+        return;
+      }
+
+      let wordIndex = 0;
+      let letterIndex = words[0].length;
+      let deleting = true;
+
+      function tick() {
+        const word = words[wordIndex];
+        let delay = deleting ? 42 : 74;
+
+        if (deleting) {
+          letterIndex = Math.max(letterIndex - 1, 0);
+          target.textContent = word.slice(0, letterIndex);
+          if (letterIndex <= 0) {
+            deleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            delay = 260;
+          }
+        } else {
+          const nextWord = words[wordIndex];
+          letterIndex = Math.min(letterIndex + 1, nextWord.length);
+          target.textContent = nextWord.slice(0, letterIndex);
+          if (letterIndex >= nextWord.length) {
+            deleting = true;
+            delay = 1350;
+          }
+        }
+
+        window.setTimeout(tick, delay);
+      }
+
+      window.setTimeout(tick, 1200);
+    }
+
     async function loadConfig() {
       const defaults = window.PONLO_DEFAULT_CONFIG || {};
       try {
@@ -1419,7 +1500,7 @@
       setLink(document.getElementById("headerCta"), config.brand?.headerButton, "Contacto");
 
       // Hero
-      document.getElementById("heroTitle").textContent = safe(config.hero?.title);
+      renderHeroTitle(config.hero);
       document.getElementById("heroDesc").textContent = safe(config.hero?.description);
       const heroPrimary = document.getElementById("heroPrimary");
       if (heroPrimary && config.hero?.primaryCta) {
@@ -1450,83 +1531,38 @@
         fg.appendChild(card);
       });
 
-      // Projects slider
-      const slider = document.getElementById("projectsSlider");
-      const dotsContainer = document.getElementById("sliderDots");
-      slider.innerHTML = "";
-      dotsContainer.innerHTML = "";
+      // Projects showcase
+      const showcase = document.getElementById("projectsShowcase");
+      showcase.innerHTML = "";
       const projects = config.projects || [];
-      projects.forEach((p, i) => {
-        const card = document.createElement("article");
-        card.className = "project-card";
-        const tagsHtml = (p.tags || []).map(t => `<span class="tag">${safe(t)}</span>`).join("");
-        card.innerHTML = `
-          <a href="${safe(p.linkUrl, "#")}" target="_blank" rel="noopener" class="project-img">
-            <img src="${safe(p.imageUrl)}" alt="${safe(p.title)}" loading="lazy" onload="this.classList.add('loaded')" />
-          </a>
-          <div class="project-info">
-            <h3>${safe(p.title)}</h3>
-            <p>${safe(p.description)}</p>
-            <div class="project-tags">${tagsHtml}</div>
-            <a href="${safe(p.linkUrl, "#")}" target="_blank" rel="noopener" class="project-link">Ver proyecto →</a>
-          </div>
-        `;
-        slider.appendChild(card);
+      const rows = [projects.slice(0, 2), projects.slice(2)];
+      rows.filter(rowProjects => rowProjects.length).forEach((rowProjects, rowIndex) => {
+        const row = document.createElement("div");
+        row.className = "project-row";
+        rowProjects.forEach((p, itemIndex) => {
+          const projectIndex = rowIndex === 0 ? itemIndex : itemIndex + 2;
+          const card = document.createElement("a");
+          card.className = `project-card ${projectIndex < 2 ? "project-large" : "project-small"}`;
+          card.href = safe(p.linkUrl, "#");
+          card.target = "_blank";
+          card.rel = "noopener";
+          card.setAttribute("aria-label", `Ver proyecto ${safe(p.title)}`);
+          const category = Array.isArray(p.tags) && p.tags.length ? p.tags[0] : "Proyecto";
+          card.innerHTML = `
+            <div class="project-image">
+              <img src="${safe(p.imageUrl)}" alt="${safe(p.title)}" loading="lazy" />
+            </div>
+            <div class="project-info">
+              <span>${safe(category)}</span>
+              <h3>${safe(p.title)}</h3>
+              <p>${safe(p.description)}</p>
+              <strong>Ver proyecto</strong>
+            </div>
+          `;
+          row.appendChild(card);
+        });
+        showcase.appendChild(row);
       });
-
-      // Slider pagination (page-based dots)
-      const prevBtn = document.getElementById("sliderPrev");
-      const nextBtn = document.getElementById("sliderNext");
-
-      const getPageInfo = () => {
-        const sw = slider.scrollWidth;
-        const cw = slider.clientWidth;
-        if (!cw || cw >= sw) return { total: 1, current: 0 };
-        const maxScroll = sw - cw;
-        const total = Math.min(Math.max(1, Math.ceil(maxScroll / cw) + 1), projects.length);
-        const current = Math.round((slider.scrollLeft / maxScroll) * (total - 1));
-        return { total, current: Math.min(current, total - 1) };
-      };
-
-      const buildDots = () => {
-        const { total, current } = getPageInfo();
-        const existing = dotsContainer.querySelectorAll(".slider-dot").length;
-        if (existing !== total) {
-          dotsContainer.innerHTML = "";
-          for (let i = 0; i < total; i++) {
-            const dot = document.createElement("button");
-            dot.className = "slider-dot" + (i === current ? " active" : "");
-            dot.setAttribute("aria-label", `Página ${i + 1}`);
-            dot.addEventListener("click", () => {
-              const maxScroll = slider.scrollWidth - slider.clientWidth;
-              const target = total > 1 ? (i / (total - 1)) * maxScroll : 0;
-              slider.scrollTo({ left: target, behavior: "smooth" });
-            });
-            dotsContainer.appendChild(dot);
-          }
-        } else {
-          dotsContainer.querySelectorAll(".slider-dot").forEach((d, i) => {
-            d.classList.toggle("active", i === current);
-          });
-        }
-        prevBtn.disabled = slider.scrollLeft <= 10;
-        nextBtn.disabled = slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10;
-      };
-
-      prevBtn.addEventListener("click", () => {
-        slider.scrollBy({ left: -slider.clientWidth * 0.8, behavior: "smooth" });
-      });
-      nextBtn.addEventListener("click", () => {
-        slider.scrollBy({ left: slider.clientWidth * 0.8, behavior: "smooth" });
-      });
-
-      let scrollTimer;
-      slider.addEventListener("scroll", () => {
-        cancelAnimationFrame(scrollTimer);
-        scrollTimer = requestAnimationFrame(buildDots);
-      });
-      buildDots();
-      window.addEventListener("resize", () => { dotsContainer.innerHTML = ""; buildDots(); });
 
       // Pricing
       const pr = config.pricing || {};
@@ -1542,14 +1578,14 @@
           <div class="pricing-price"><span>USD</span> ${safe(pr.price, "150")}</div>
           <p class="pricing-sub">todo incluido</p>
           <ul class="pricing-features">${featuresHtml}</ul>
-          <a href="${safe(config.hero?.primaryCta?.url, "#")}" class="btn btn-accent" style="width:100%;" target="_blank" rel="noopener">Quiero mi web →</a>
+          <a href="${safe(config.hero?.primaryCta?.url, "#")}" class="btn btn-accent" style="width:100%;" target="_blank" rel="noopener">Quiero mi web &rarr;</a>
         </div>
         <div class="pricing-card enterprise">
           <span class="pricing-badge">${safe(ent.title, "A tu medida")}</span>
           <h3>${safe(ent.description, "Para negocios que necesitan más")}</h3>
           <p class="enterprise-desc">Cotización personalizada</p>
           <ul class="pricing-features">${entFeaturesHtml}</ul>
-          <a href="${safe(config.hero?.primaryCta?.url, "#")}" class="btn btn-accent" style="width:100%;background:var(--cta-bg);color:var(--cta-text);" target="_blank" rel="noopener">Escríbenos →</a>
+          <a href="${safe(config.hero?.primaryCta?.url, "#")}" class="btn btn-accent" style="width:100%;background:var(--cta-bg);color:var(--cta-text);" target="_blank" rel="noopener">Escríbenos &rarr;</a>
         </div>
       `;
 
@@ -1633,6 +1669,6 @@
       const pricingCard = document.querySelector(".pricing-card");
       if (pricingCard) priceObserver.observe(pricingCard);
     });
-  </script>
+</script>
 </body>
 </html>
