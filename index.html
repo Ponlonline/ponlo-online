@@ -1706,6 +1706,15 @@
         const card = targets[index];
         if (!card) return;
         const left = card.offsetLeft - ((showcase.clientWidth - card.offsetWidth) / 2);
+        if (behavior === "auto") {
+          const previousBehavior = showcase.style.scrollBehavior;
+          showcase.style.scrollBehavior = "auto";
+          showcase.scrollLeft = left;
+          window.requestAnimationFrame(() => {
+            showcase.style.scrollBehavior = previousBehavior;
+          });
+          return;
+        }
         showcase.scrollTo({ left, behavior });
       }
 
